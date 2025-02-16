@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url>
+			<loc>https://a2va.dev/blog/test-mdx</loc>
+			<lastmod>2025-02-16T15:47:44.091Z</lastmod>
+			<changefreq>monthly</changefreq>
+			<priority>0.8</priority>
+		</url>
+        <url>
+			<loc>https://a2va.dev/blog</loc>
+			<lastmod>2025-02-16T15:15:35.556Z</lastmod>
+			<changefreq>monthly</changefreq>
+			<priority>0.8</priority>
+		</url>
+        <url>
+			<loc>https://a2va.dev/</loc>
+			<lastmod>2025-02-16T15:15:35.503Z</lastmod>
+			<changefreq>monthly</changefreq>
+			<priority>0.8</priority>
+		</url>
+        
+    </urlset>

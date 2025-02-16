@@ -1,0 +1,3 @@
+User-agent: GPTBot
+Disallow: /
+Sitemap: https://a2va.dev/sitemap.xml

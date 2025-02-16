@@ -1,0 +1,94 @@
+---
+title: Test MDX
+description: Test MDX.
+tags: [markdown, mdx, test]
+date: 2025-01-15
+author: A2va
+unpublished: true
+---
+
+import { Tooltip, StarTooltip } from '~/components/tooltip';
+import { Tree } from '~/components/tree';
+
+# Header 1
+
+## Header 2
+
+### Header 3
+
+#### Header 4
+
+##### Header 5
+
+###### Header 6
+
+Bold: **Hello**\
+Italic: *Hello*\
+Underline: <u>Hello</u>\
+Strikethrough: ~~Hello~~
+
+Bullet Points:
+* Hello
+* World
+
+Numbered List:
+1. Hello 
+2. World
+
+Task List:
+- [ ] Unchecked
+- [x] Checked
+
+
+{/* Code Block
+```
+test
+This is a test
+```
+
+Code Block with filename
+```txt file="test.txt"
+test
+This is a test
+``` */}
+
+Inline code highlighting: `console.log("hello"){:js}`
+
+Code with filename and line numerotation
+```c file="src/main.c" lines="true" start="10"
+int main() {
+  printf("Hello, World!");
+  return 0;
+}
+```
+
+<Tooltip content="This is a tooltip">Hello world</Tooltip>
+<Tooltip content="This is a tooltip very long to show that it is expanding" position={'bottom'}>Hello world</Tooltip>
+
+<StarTooltip content="This is a tooltip" />
+
+<Tree tree={{
+  l: "/andi.dev",
+  c: [
+    {
+    l: "src",
+    c: [{
+      l: "routes", 
+      c: [
+        {
+          l: "blog",
+          c: [
+            "post-1.mdx",
+            "post-2.mdx",
+            "post-3.mdx",
+          ]
+        }
+      ]},
+      "(home).tsx"
+    ]
+  }]
+}} />
+
+Paragraph to see how to displays on multiline by trying to write a very long string hoping that it will be displayed on multiple lines.
+
+

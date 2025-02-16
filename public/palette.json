@@ -1,0 +1,161 @@
+[
+  {
+    "paletteName": "Warm",
+    "swatches": [
+      {
+        "name": "warm 12",
+        "color": "201A1A"
+      },
+      {
+        "name": "warm 11",
+        "color": "262020"
+      },
+      {
+        "name": "warm 10",
+        "color": "342D2D"
+      },
+      {
+        "name": "warm 9",
+        "color": "453D3D"
+      },
+      {
+        "name": "warm 8",
+        "color": "5C5353"
+      },
+      {
+        "name": "warm 7",
+        "color": "736969"
+      },
+      {
+        "name": "warm 6",
+        "color": "8B8181"
+      },
+      {
+        "name": "warm 5",
+        "color": "A19797"
+      },
+      {
+        "name": "warm 4",
+        "color": "BCB2B2"
+      },
+      {
+        "name": "warm 3",
+        "color": "D7CECE"
+      },
+      {
+        "name": "warm 2",
+        "color": "EDE6E6"
+      },
+      {
+        "name": "warm 1",
+        "color": "FAF4F4"
+      }
+    ]
+  },
+  {
+    "paletteName": "Neutral",
+    "swatches": [
+      {
+        "name": "neutral 12",
+        "color": "11181C"
+      },
+      {
+        "name": "neutral 11",
+        "color": "687076"
+      },
+      {
+        "name": "neutral 10",
+        "color": "7E868C"
+      },
+      {
+        "name": "neutral 9",
+        "color": "889096"
+      },
+      {
+        "name": "neutral 8",
+        "color": "C1C8CD"
+      },
+      {
+        "name": "neutral 7",
+        "color": "D7DBDF"
+      },
+      {
+        "name": "neutral 6",
+        "color": "DFE3E6"
+      },
+      {
+        "name": "neutral 5",
+        "color": "E6E8EB"
+      },
+      {
+        "name": "neutral 4",
+        "color": "ECEEF0"
+      },
+      {
+        "name": "neutral 3",
+        "color": "F1F3F5"
+      },
+      {
+        "name": "neutral 2",
+        "color": "F8F9FA"
+      },
+      {
+        "name": "neutral 1",
+        "color": "FBFCFD"
+      }
+    ]
+  },
+  {
+    "paletteName": "Primary",
+    "swatches": [
+      {
+        "name": "primary 12",
+        "color": "53110A"
+      },
+      {
+        "name": "primary 11",
+        "color": "5E1614"
+      },
+      {
+        "name": "primary 10",
+        "color": "72221D"
+      },
+      {
+        "name": "primary 9",
+        "color": "892E29"
+      },
+      {
+        "name": "primary 8",
+        "color": "A53F3A"
+      },
+      {
+        "name": "primary 7",
+        "color": "BC544D"
+      },
+      {
+        "name": "primary 6",
+        "color": "D26A63"
+      },
+      {
+        "name": "primary 5",
+        "color": "E3857F"
+      },
+      {
+        "name": "primary 4",
+        "color": "F2A29A"
+      },
+      {
+        "name": "primary 3",
+        "color": "F8BAB2"
+      },
+      {
+        "name": "primary 2",
+        "color": "FFCFC9"
+      },
+      {
+        "name": "primary 1",
+        "color": "FFD9D9"
+      }
+    ]
+  }
+]
