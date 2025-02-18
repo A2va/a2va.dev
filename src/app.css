@@ -277,7 +277,7 @@ body {
 	/* Numbering lines on code blocks */
 	.code-lines code {
 		counter-reset: step;
-		counter-increment: step calc(var(--starting-line, 1) - 1); 
+		counter-increment: step calc(var(--starting-line, 1) - 1);
 	}
 
 	.code-lines code .line::before {

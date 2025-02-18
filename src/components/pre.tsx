@@ -91,15 +91,15 @@ export function Pre(props: PreProps) {
 					<pre
 						class={cx(
 							"shiki overflow-x-auto",
-							(props.lines?.replace(/['"]+/g, '') === "true") ? "code-lines" : "",
+							props.lines?.replace(/['"]+/g, "") === "true" ? "code-lines" : "",
 						)}
-						style={{ "--starting-line": props.start?.replace(/['"]+/g, '') }}
+						style={{ "--starting-line": props.start?.replace(/['"]+/g, "") }}
 						ref={ref}
 					>
 						{props.children}
 					</pre>
 				</div>
 			</div>
-		</div >
+		</div>
 	);
 }

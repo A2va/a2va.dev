@@ -15,6 +15,7 @@
 	},
 	"javascript": {
 		"formatter": {
+			"trailingCommas": "all",
 			"jsxQuoteStyle": "double"
 		}
 	}
