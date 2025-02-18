@@ -16,8 +16,6 @@ const tooltipStyles = cva(
 		"after:border-[4px]",
 		"after:border-solid",
 		'after:content-[""]',
-		"left-1/2",
-		"-translate-x-1/2",
 		"max-w-[300px]",
 		"w-max",
 		"z-50",
@@ -32,6 +30,8 @@ const tooltipStyles = cva(
 				top: [
 					"bottom-full",
 					"mb-2",
+					"left-1/2",
+					"-translate-x-1/2",
 					"after:-bottom-2",
 					"after:left-1/2",
 					"after:-translate-x-1/2",
@@ -42,6 +42,8 @@ const tooltipStyles = cva(
 				bottom: [
 					"top-full",
 					"mt-2",
+					"left-1/2",
+					"-translate-x-1/2",
 					"after:-top-2",
 					"after:left-1/2",
 					"after:-translate-x-1/2",
@@ -52,7 +54,9 @@ const tooltipStyles = cva(
 				left: [
 					"right-full",
 					"mr-2",
-					"after:-right-2",
+					"top-1/2",
+					"-translate-y-1/2",
+					"after:-right-[7px]",
 					"after:top-1/2",
 					"after:-translate-y-1/2",
 					"after:border-l-primary-7",
@@ -62,6 +66,8 @@ const tooltipStyles = cva(
 				right: [
 					"left-full",
 					"ml-2",
+					"top-1/2",
+					"-translate-y-1/2",
 					"after:-left-2",
 					"after:top-1/2",
 					"after:-translate-y-1/2",
