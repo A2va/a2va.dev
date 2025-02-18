@@ -9,6 +9,7 @@ const tooltipStyles = cva(
 		"px-3",
 		"py-2",
 		"bg-primary-7",
+		"bg-opacity-100",
 		"text-white",
 		"after:absolute",
 		"after:block",
@@ -19,6 +20,7 @@ const tooltipStyles = cva(
 		"-translate-x-1/2",
 		"max-w-[300px]",
 		"w-max",
+		"z-50",
 	],
 	{
 		defaultVariants: {
@@ -80,7 +82,7 @@ const tooltipStyles = cva(
 type TooltipBaseProps = VariantProps<typeof tooltipStyles>;
 interface TooltipProps
 	extends JSX.HTMLAttributes<HTMLDivElement>,
-	TooltipBaseProps {
+		TooltipBaseProps {
 	content: string;
 }
 
@@ -117,7 +119,10 @@ export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 	);
 }
 
-
 export function StarTooltip(props: Readonly<TooltipProps>): JSX.Element {
-	return (<Tooltip {...props}><span class="font-bold">*</span></Tooltip>);
+	return (
+		<Tooltip {...props}>
+			<span class="font-bold">*</span>
+		</Tooltip>
+	);
 }
