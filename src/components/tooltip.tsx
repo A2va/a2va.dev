@@ -4,6 +4,9 @@ import { type JSX, Show, createSignal, splitProps } from "solid-js";
 // Updated tooltip styles with arrow variants
 const tooltipStyles = cva(
 	[
+		"transition-all", 
+		"duration-150",
+		"ease-out",
 		"absolute",
 		"rounded-md",
 		"px-3",
@@ -94,29 +97,57 @@ interface TooltipProps
 
 export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 	const [isVisible, setIsVisible] = createSignal(false);
+	const timeoutRef = { current: null as number | null };
 	const [{ position, size, content }, rest] = splitProps(props, [
 		"position",
 		"size",
 		"content",
 	]);
 
+	const showTooltip = () => {
+		if(timeoutRef.current !== null)
+			clearTimeout(timeoutRef.current);
+		setIsVisible(true);
+
+		// Dynamic timeout based on content length
+		const baseTime = 1500; // Minimum time in ms
+		const timePerChar = 50; // Extra time per character
+		const totalTime = baseTime + content.length * timePerChar;
+
+		timeoutRef.current = window.setTimeout(() => {
+			setIsVisible(false);
+		}, totalTime);
+	};
+
+	const hideTooltip = () => {
+		if (timeoutRef.current !== null)
+			clearTimeout(timeoutRef.current);
+		setIsVisible(false);
+	};
+
+	const toggleTooltip = () => {
+		console.log("pointer down");
+		if (isVisible()) {
+			hideTooltip();
+		} else {
+			showTooltip();
+		}
+	};
+
 	return (
 		<div
 			class="relative inline-block mb-5"
-			onPointerEnter={() => setIsVisible(true)}
-			onPointerLeave={() => setIsVisible(false)}
-			onPointerDown={() => setIsVisible(true)}
-			onClick={() => setIsVisible(false)}
+			onMouseEnter={() => setIsVisible(true)}
+			onMouseLeave={() => setIsVisible(false)}
+			onTouchStart={toggleTooltip} // Touch interaction
 			{...rest}
 		>
 			{props.children}
-			<div
+			<div class="text-center"
 				classList={{
 					[tooltipStyles({ position, size })]: true,
 					"opacity-0 scale-95 pointer-events-none": !isVisible(),
-					"opacity-100 scale-100 pointer-events-auto": isVisible(),
-					"transition-all duration-150 ease-out": true,
-					"text-center": true,
+					"opacity-100 scale-100 pointer-events-auto": isVisible()
 				}}
 			>
 				{content}
