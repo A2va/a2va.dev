@@ -2,6 +2,7 @@ import { createMemo, For, type JSX, Show, splitProps } from "solid-js";
 import { Anchor, Image, Page, Typography } from "~/components";
 
 import { posts } from "~/data/posts";
+import { hyphenate } from "~/utils/hyphenate";
 import type { Post } from "~/utils/types";
 
 interface BlogCardProps {
@@ -12,10 +13,6 @@ const FLAGS = {
 	showDescription: true,
 	showTags: false,
 };
-
-function hyphenate(str: string): string {
-	return str.replace(/\s+/g, "-").toLowerCase();
-}
 
 function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 	const [{ post }, rest] = splitProps(props, ["post"]);

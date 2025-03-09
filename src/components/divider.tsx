@@ -1,7 +1,7 @@
 import { type VariantProps, cva, cx } from "class-variance-authority";
 import { type JSX, splitProps } from "solid-js";
 
-const dividerStyles = cva(["divider", "border-content-neutral-secondary"], {
+const dividerStyles = cva(["divider", "border-content-warm-secondary"], {
 	defaultVariants: {
 		size: "md",
 	},
@@ -17,7 +17,7 @@ const dividerStyles = cva(["divider", "border-content-neutral-secondary"], {
 type DividerBaseProps = VariantProps<typeof dividerStyles>;
 interface DividerProps
 	extends JSX.HTMLAttributes<HTMLHRElement>,
-		DividerBaseProps {}
+	DividerBaseProps { }
 
 export function Divider(props: Readonly<DividerProps>): JSX.Element {
 	const [{ size }, rest] = splitProps(props, ["size"]);

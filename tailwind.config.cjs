@@ -78,13 +78,13 @@ module.exports = {
 				},
 				// Semantic tokens
 				content: {
-					neutral: {
+					warm: {
 						primary: "var(--content-warm)",
 						secondary: "var(--content-warm-secondary)",
 					},
 				},
 				border: {
-					neutral: "var(--border-warm)",
+					warm: "var(--border-warm)",
 				},
 				text: {
 					secondary: "var(--text-secondary)",

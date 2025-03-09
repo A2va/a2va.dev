@@ -48,3 +48,11 @@ export type Tag = {
 	// indexes of posts with tag (they point to the posts list coming from virtual:blog-posts)
 	posts: number[];
 };
+
+export type Project = {
+	name: string;
+	description: string;
+	url: string;
+	logo: string;
+	status?: string;
+};

@@ -3,7 +3,7 @@ import { type JSX, Show, splitProps } from "solid-js";
 
 import { Text } from "./typography/text";
 
-const imageStyles = cva(["image", "border-content-neutral-secondary"], {
+const imageStyles = cva(["image", "border-content-warm-secondary"], {
 	variants: {
 		center: {
 			true: ["mx-auto"],
@@ -15,7 +15,7 @@ const imageStyles = cva(["image", "border-content-neutral-secondary"], {
 type ImageBaseProps = VariantProps<typeof imageStyles>;
 export interface ImageProps
 	extends JSX.ImgHTMLAttributes<HTMLImageElement>,
-		ImageBaseProps {
+	ImageBaseProps {
 	alt: string;
 	caption?: string;
 	showCaption?: boolean;

@@ -7,13 +7,13 @@ import type { PolymorphicComponent } from "~/utils/types";
 
 const cardStyles = cva([
 	"card",
-	"p-8 rounded-xl bg-content-neutral-secondary border border-neutral-7",
+	"p-8 rounded-xl bg-content-warm-secondary border border-warm-7",
 ]);
 
 type CardBaseProps = VariantProps<typeof cardStyles>;
 interface CardProps
 	extends PolymorphicComponent<HTMLDivElement>,
-		CardBaseProps {}
+	CardBaseProps { }
 
 export function Card(props: Readonly<CardProps>): JSX.Element {
 	const [{ as, class: className }, rest] = splitProps(props, ["as", "class"]);

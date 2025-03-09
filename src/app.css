@@ -88,11 +88,6 @@
 	--dark-neutral-11: #9ba1a6;
 	--dark-neutral-12: #ecedee;
 
-	--content-warm: var(--warm-2);
-	--content-warm-secondary: var(--warm-5);
-	--border-warm: var(--warm-5);
-	--text-secondary: var(--warm-11);
-
 	--line-height: 1.2rem;
 	--border-thickness: 2px;
 }
@@ -255,6 +250,10 @@ body {
 	@apply bg-warm-1 text-warm-12 transition-colors duration-150 ease-in-out;
 
 	--tree-text-color: var(--warm-10);
+	--content-warm: var(--warm-2);
+	--content-warm-secondary: var(--warm-3);
+	--border-warm: var(--warm-5);
+	--text-secondary: var(--warm-11);
 
 	@media (prefers-reduced-motion) {
 		transition: none;
@@ -266,11 +265,11 @@ body {
 	}
 
 	/* Override shiki background color to match my theme */
-	.shiki pre > span {
+	.shiki pre>span {
 		background-color: var(--warm-2);
 	}
 
-	.shiki > span {
+	.shiki>span {
 		background-color: var(--warm-1);
 	}
 
@@ -337,6 +336,7 @@ body {
 }
 
 @layer base {
+
 	:focus-visible,
 	[role="button"]:focus-visible,
 	[role="button"]:focus {

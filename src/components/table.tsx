@@ -6,7 +6,7 @@ const tableStyles = cva(["table", "my-5"]);
 
 export interface TableProps
 	extends JSX.HTMLAttributes<HTMLTableElement>,
-		TableBaseProps {
+	TableBaseProps {
 	containerClass?: string;
 }
 
@@ -18,7 +18,7 @@ export function Table(props: Readonly<TableProps>): JSX.Element {
 	return (
 		<div
 			class={cx(
-				"overflow-x-auto rounded-xl border border-solid border-neutral-7 bg-neutral-1",
+				"overflow-x-auto rounded-xl border border-solid border-warm-7 bg-warm-1",
 				containerClass,
 			)}
 		>

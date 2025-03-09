@@ -4,7 +4,7 @@ import { type JSX, Show, createSignal, splitProps } from "solid-js";
 // Updated tooltip styles with arrow variants
 const tooltipStyles = cva(
 	[
-		"transition-all", 
+		"transition-all",
 		"duration-150",
 		"ease-out",
 		"absolute",
@@ -105,8 +105,7 @@ export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 	]);
 
 	const showTooltip = () => {
-		if(timeoutRef.current !== null)
-			clearTimeout(timeoutRef.current);
+		if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
 		setIsVisible(true);
 
 		// Dynamic timeout based on content length
@@ -120,8 +119,7 @@ export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 	};
 
 	const hideTooltip = () => {
-		if (timeoutRef.current !== null)
-			clearTimeout(timeoutRef.current);
+		if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
 		setIsVisible(false);
 	};
 
@@ -143,11 +141,12 @@ export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 			{...rest}
 		>
 			{props.children}
-			<div class="text-center"
+			<div
+				class="text-center"
 				classList={{
 					[tooltipStyles({ position, size })]: true,
 					"opacity-0 scale-95 pointer-events-none": !isVisible(),
-					"opacity-100 scale-100 pointer-events-auto": isVisible()
+					"opacity-100 scale-100 pointer-events-auto": isVisible(),
 				}}
 			>
 				{content}

@@ -1,4 +1,17 @@
+import { For } from "solid-js";
 import { Anchor, Page, Typography } from "~/components";
+import { ProjectCard } from "~/components/project-card";
+import { Project } from "~/utils/types";
+
+const PROJECTS: Project[] = [
+	{
+		name: "XMake",
+		url: "https://xmake.io",
+		description: "A cross-platform build utility based on Lua. Modern C/C++ build tool: Simple, Fast, Powerful dependency package integration. I'm one of its contributors since 2022.",
+		logo: "projects/xmake.svg",
+	}
+]
+
 
 export default function Home() {
 	return (
@@ -37,6 +50,16 @@ export default function Home() {
 					, a Lua-based build system focused on C and C++. I also have a few
 					other projects that you can check out on my GitHub.
 				</Typography.Paragraph>
+			</section>
+			<section class="mt-12">
+				<Typography.Display id="intro" size="sm">
+					Projects
+				</Typography.Display>
+				<div class="mt-12">
+					<For each={PROJECTS}>
+						{project => <ProjectCard project={project} />}
+					</For>
+				</div>
 			</section>
 		</Page>
 	);

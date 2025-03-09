@@ -14,6 +14,7 @@ import { Page } from "~/components/page";
 import { postsMap } from "~/data/posts";
 
 import NotFound from "~/routes/[...404]";
+import { hyphenate } from "~/utils/hyphenate";
 
 const getPostMeta = query(async (slug: string) => {
 	"use server";
@@ -34,9 +35,6 @@ const getPostMeta = query(async (slug: string) => {
 	return post;
 }, "slug");
 
-function hyphenate(str: string): string {
-	return str.replace(/\s+/g, "-").toLowerCase();
-}
 
 export default function BlogEntry(props: Readonly<RouteSectionProps>) {
 	const location = useLocation();
