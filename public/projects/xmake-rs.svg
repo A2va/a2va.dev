@@ -1,0 +1,149 @@
+<svg width="106" height="106" overflow="visible" viewBox="0 0 106 106"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<style type="text/css">
+		#background{
+			fill:white;
+		}
+		#midground{
+			fill:#8BC34A;
+		}
+		#shadowline{
+			stroke:#444;
+			stroke-width:1px;
+			fill:transparent;
+		}
+		#foreground{
+			fill:rgba(0,150,136,0.76);
+		}
+		#inside_g{
+			clip-path:url(#circlewrapper);
+		}
+		#outside_g{
+			fill:#e0f2f1;
+		}
+		#inside_layout{
+			transform:translateY(5px);
+		}
+		#outside_s{
+			filter:url(#dropshadow);
+			fill:rgba(0,0,0,0.2);
+		}
+		#inside_w{
+			filter:url(#dropshadow);
+		}
+	</style>
+
+  <!-- 1) White background so that everything outside Rust’s shapes remains white -->
+  <!-- <rect width="106" height="106" fill="white"/> -->
+
+  <defs>
+	<!-- <filter id="dropshadow">
+		<feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>
+		<feOffset dx="-0.3" dy="-0.3" result="offsetblur"/>
+		<feMerge>
+			<feMergeNode/>
+			<feMergeNode in="SourceGraphic"/>
+		</feMerge>
+	</filter> -->
+	<clipPath id="circlewrapper" clipPathUnits="userSpaceOnUse">
+		<circle cx="32" cy="32" r="27"/>
+	</clipPath>
+    <!-- Original small shapes from Rust -->
+    <polygon id="cog" points="46,3 51,0 46,-3"/>
+    <polygon id="mount" points="-7,-42 0,-35 7,-42"/>
+    <circle  id="hole" cy="-40" r="3"/>
+
+    <!-- Sub-mask to carve out the 5 "holes" in the gear -->
+    <mask id="holesMask">
+      <rect x="-60" y="-60" width="120" height="120" fill="white"/>
+      <use xlink:href="#hole" transform=""      fill="black"/>
+      <use xlink:href="#hole" transform="rotate(72)"  fill="black"/>
+      <use xlink:href="#hole" transform="rotate(144)" fill="black"/>
+      <use xlink:href="#hole" transform="rotate(216)" fill="black"/>
+      <use xlink:href="#hole" transform="rotate(288)" fill="black"/>
+    </mask>
+
+    <mask id="rustMask">
+      <rect width="106" height="106" fill="black"/>
+      <g transform="translate(53,53)">
+        <path fill="white" d="
+          M -9,-15 H 4 C 12,-15 12,-7 4,-7 H -9 Z
+          M -40,22 H 0 V 11 H -9 V 3 H 1
+          C 12,3 6,22 15,22 H 40
+          V 3 H 34 V 5
+          C 34,13 25,12 24,7
+          C 23,2 19,-2 18,-2
+          C 33,-10 24,-26 12,-26
+          H -35
+          V -15 H -25 V 11 H -40 Z
+        "/>
+
+        <g id="gear" mask="url(#holesMask)">
+          <circle r="43" fill="none" stroke="white" stroke-width="9" />
+
+          <g fill="white" stroke="white" stroke-width="3" stroke-linejoin="round">
+            <use xlink:href="#cog" />
+            <use xlink:href="#cog" transform="rotate(11.25)"/>
+            <use xlink:href="#cog" transform="rotate(22.5)"/>
+            <use xlink:href="#cog" transform="rotate(33.75)"/>
+            <use xlink:href="#cog" transform="rotate(45)"/>
+            <use xlink:href="#cog" transform="rotate(56.25)"/>
+            <use xlink:href="#cog" transform="rotate(67.5)"/>
+            <use xlink:href="#cog" transform="rotate(78.75)"/>
+            <use xlink:href="#cog" transform="rotate(90)"/>
+            <use xlink:href="#cog" transform="rotate(101.25)"/>
+            <use xlink:href="#cog" transform="rotate(112.5)"/>
+            <use xlink:href="#cog" transform="rotate(123.75)"/>
+            <use xlink:href="#cog" transform="rotate(135)"/>
+            <use xlink:href="#cog" transform="rotate(146.25)"/>
+            <use xlink:href="#cog" transform="rotate(157.5)"/>
+            <use xlink:href="#cog" transform="rotate(168.75)"/>
+            <use xlink:href="#cog" transform="rotate(180)"/>
+            <use xlink:href="#cog" transform="rotate(191.25)"/>
+            <use xlink:href="#cog" transform="rotate(202.5)"/>
+            <use xlink:href="#cog" transform="rotate(213.75)"/>
+            <use xlink:href="#cog" transform="rotate(225)"/>
+            <use xlink:href="#cog" transform="rotate(236.25)"/>
+            <use xlink:href="#cog" transform="rotate(247.5)"/>
+            <use xlink:href="#cog" transform="rotate(258.75)"/>
+            <use xlink:href="#cog" transform="rotate(270)"/>
+            <use xlink:href="#cog" transform="rotate(281.25)"/>
+            <use xlink:href="#cog" transform="rotate(292.5)"/>
+            <use xlink:href="#cog" transform="rotate(303.75)"/>
+            <use xlink:href="#cog" transform="rotate(315)"/>
+            <use xlink:href="#cog" transform="rotate(326.25)"/>
+            <use xlink:href="#cog" transform="rotate(337.5)"/>
+            <use xlink:href="#cog" transform="rotate(348.75)"/>
+          </g>
+
+          <g fill="none" stroke="white" stroke-width="6" stroke-linejoin="round">
+            <use xlink:href="#mount"/>
+            <use xlink:href="#mount" transform="rotate(72)"/>
+            <use xlink:href="#mount" transform="rotate(144)"/>
+            <use xlink:href="#mount" transform="rotate(216)"/>
+            <use xlink:href="#mount" transform="rotate(288)"/>
+          </g>
+        </g>
+      </g>
+    </mask>
+  </defs>
+ 
+  <g mask="url(#rustMask)">
+    <g transform="translate(53 53) scale(3.3125) translate(-32 -32)">
+      <circle id="outside_s" cx="32" cy="32" r="30" fill="rgba(0,0,0,0.2)"/>
+      <circle id="outside_g" cx="32" cy="32" r="30" fill="#e0f2f1"/>
+      <g id="inside_w">
+        <g id="inside_g">
+          <g id="inside_layout">
+            <g id="inside_layout">
+                <polygon id="background" points="64,4 64,62 62,64 1,64 0,63 0,40 60,3"/>
+                <polygon id="midground"  points="0,63 1,64 62,64 64,62 64,50 4,13 1,12.5 0,13"/>
+                <polygon id="foreground" points="64,4 64,62 62,64 1,64 0,63 0,40 60,3"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
