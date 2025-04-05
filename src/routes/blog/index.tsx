@@ -28,14 +28,14 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 				<Show
 					when={post.image}
 					fallback={
-						<div class="aspect-[5/6] h-full w-full rounded-xl bg-warm-2 object-cover" />
+						<div class="aspect-5/6 h-full w-full rounded-xl bg-warm-2 object-cover" />
 					}
 				>
 					<Image
 						title={post.title}
 						src={post.image?.src}
 						alt={post.image?.alt ?? ""}
-						class="aspect-[5/6] w-full h-full rounded-xl object-cover block"
+						class="aspect-5/6 w-full h-full rounded-xl object-cover block"
 					/>
 				</Show>
 				<Typography.Paragraph variant={"subdued"} class="mt-3">

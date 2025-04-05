@@ -6,7 +6,7 @@ import { defaultTo } from "~/utils/default-to";
 import type { PolymorphicComponent } from "~/utils/types";
 
 const badgeStyles = cva(
-	["badge", "text-xs font-medium px-2 py-0.5 rounded overflow-hidden"],
+	["badge", "text-xs font-medium px-2 py-0.5 rounded-sm overflow-hidden"],
 	{
 		variants: {
 			intent: {

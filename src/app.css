@@ -1,249 +1,350 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-	/* ==== Light ==== */
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
-	--light-warm-1: #faf4f4;
-	--light-warm-2: #ede6e6;
-	--light-warm-3: #d7cece;
-	--light-warm-4: #bcb2b2;
-	--light-warm-5: #a19797;
-	--light-warm-6: #8b8181;
-	--light-warm-7: #736969;
-	--light-warm-8: #5c5353;
-	--ligth-warm-9: #453d3d;
-	--light-warm-10: #342d2d;
-	--light-warm-11: #262020;
-	--light-warm-12: #201b1b;
+@theme {
+	--color-warm-1: var(--warm-1);
+	--color-warm-2: var(--warm-2);
+	--color-warm-3: var(--warm-3);
+	--color-warm-4: var(--warm-4);
+	--color-warm-5: var(--warm-5);
+	--color-warm-6: var(--warm-6);
+	--color-warm-7: var(--warm-7);
+	--color-warm-8: var(--warm-8);
+	--color-warm-9: var(--warm-9);
+	--color-warm-10: var(--warm-10);
+	--color-warm-11: var(--warm-11);
+	--color-warm-12: var(--warm-12);
 
-	--light-primary-1: #ffd9d9;
-	--light-primary-2: #ffcfc9;
-	--light-primary-3: #f8bab2;
-	--light-primary-4: #f2a29a;
-	--light-primary-5: #e3857f;
-	--light-primary-6: #d26a63;
-	--light-primary-7: #bc544d;
-	--light-primary-8: #a53f3a;
-	--light-primary-9: #892e29;
-	--light-primary-10: #72221d;
-	--light-primary-11: #5e1614;
-	--light-primary-12: #53110a;
+	--color-warm-inverse-1: var(--warm-inverse-1);
+	--color-warm-inverse-2: var(--warm-inverse-2);
+	--color-warm-inverse-3: var(--warm-inverse-3);
+	--color-warm-inverse-4: var(--warm-inverse-4);
+	--color-warm-inverse-5: var(--warm-inverse-5);
+	--color-warm-inverse-6: var(--warm-inverse-6);
+	--color-warm-inverse-7: var(--warm-inverse-7);
+	--color-warm-inverse-8: var(--warm-inverse-8);
+	--color-warm-inverse-9: var(--warm-inverse-9);
+	--color-warm-inverse-10: var(--warm-inverse-10);
+	--color-warm-inverse-11: var(--warm-inverse-11);
+	--color-warm-inverse-12: var(--warm-inverse-12);
 
-	--light-primary: var(--light-primary-9);
+	--color-primary-1: var(--primary-1);
+	--color-primary-2: var(--primary-2);
+	--color-primary-3: var(--primary-3);
+	--color-primary-4: var(--primary-4);
+	--color-primary-5: var(--primary-5);
+	--color-primary-6: var(--primary-6);
+	--color-primary-7: var(--primary-7);
+	--color-primary-8: var(--primary-8);
+	--color-primary-9: var(--primary-9);
+	--color-primary-10: var(--primary-10);
+	--color-primary-11: var(--primary-11);
+	--color-primary-12: var(--primary-12);
+	--color-primary: var(--primary);
 
-	--light-neutral-1: #fbfcfd;
-	--light-neutral-2: #f8f9fa;
-	--light-neutral-3: #f1f3f5;
-	--light-neutral-4: #eceef0;
-	--light-neutral-5: #e6e8eb;
-	--light-neutral-6: #dfe3e6;
-	--light-neutral-7: #d7dbdf;
-	--light-neutral-8: #c1c8cd;
-	--light-neutral-9: #889096;
-	--light-neutral-10: #7e868c;
-	--light-neutral-11: #687076;
-	--light-neutral-12: #11181c;
+	--color-neutral-1: var(--neutral-1);
+	--color-neutral-2: var(--neutral-2);
+	--color-neutral-3: var(--neutral-3);
+	--color-neutral-4: var(--neutral-4);
+	--color-neutral-5: var(--neutral-5);
+	--color-neutral-6: var(--neutral-6);
+	--color-neutral-7: var(--neutral-7);
+	--color-neutral-8: var(--neutral-8);
+	--color-neutral-9: var(--neutral-9);
+	--color-neutral-10: var(--neutral-10);
+	--color-neutral-11: var(--neutral-11);
+	--color-neutral-12: var(--neutral-12);
 
-	/* ==== Dark ==== */
-	--dark-warm-1: #201b1b;
-	--dark-warm-2: #262020;
-	--dark-warm-3: #342d2d;
-	--dark-warm-4: #453d3d;
-	--dark-warm-5: #5c5353;
-	--dark-warm-6: #736969;
-	--dark-warm-7: #8b8181;
-	--dark-warm-8: #a19797;
-	--dark-warm-9: #bcb2b2;
-	--dark-warm-10: #d7cece;
-	--dark-warm-11: #ede6e6;
-	--dark-warm-12: #faf4f4;
+	--color-neutral-inverse-1: var(--neutral-inverse-1);
+	--color-neutral-inverse-2: var(--neutral-inverse-2);
+	--color-neutral-inverse-3: var(--neutral-inverse-3);
+	--color-neutral-inverse-4: var(--neutral-inverse-4);
+	--color-neutral-inverse-5: var(--neutral-inverse-5);
+	--color-neutral-inverse-6: var(--neutral-inverse-6);
+	--color-neutral-inverse-7: var(--neutral-inverse-7);
+	--color-neutral-inverse-8: var(--neutral-inverse-8);
+	--color-neutral-inverse-9: var(--neutral-inverse-9);
+	--color-neutral-inverse-10: var(--neutral-inverse-10);
+	--color-neutral-inverse-11: var(--neutral-inverse-11);
+	--color-neutral-inverse-12: var(--neutral-inverse-12);
 
-	--dark-primary-12: var(--light-primary-1);
-	--dark-primary-11: var(--light-primary-2);
-	--dark-primary-10: var(--light-primary-3);
-	--dark-primary-9: var(--light-primary-4);
-	--dark-primary-8: var(--light-primary-5);
-	--dark-primary-7: var(--light-primary-6);
-	--dark-primary-6: var(--light-primary-7);
-	--dark-primary-5: var(--light-primary-8);
-	--dark-primary-4: var(--light-primary-9);
-	--dark-primary-3: var(--light-primary-10);
-	--dark-primary-2: var(--light-primary-11);
-	--dark-primary-1: var(--light-primary-12);
+	--color-content-warm-primary: var(--content-warm);
+	--color-content-warm-secondary: var(--content-warm-secondary);
 
-	--dark-primary: var(--light-primary-5);
+	--color-border-warm: var(--border-warm);
 
-	--dark-neutral-1: #151718;
-	--dark-neutral-2: #1a1d1e;
-	--dark-neutral-3: #202425;
-	--dark-neutral-4: #26292b;
-	--dark-neutral-5: #2b2f31;
-	--dark-neutral-6: #313538;
-	--dark-neutral-7: #3a3f42;
-	--dark-neutral-8: #4c5155;
-	--dark-neutral-9: #697177;
-	--dark-neutral-10: #787f85;
-	--dark-neutral-11: #9ba1a6;
-	--dark-neutral-12: #ecedee;
+	--color-text-secondary: var(--text-secondary);
 
-	--line-height: 1.2rem;
-	--border-thickness: 2px;
+	--font-sans: Inter,
+	sans-serif;
+	--font-mono: JetBrains Mono,
+	monospace;
 }
 
-[color-scheme="light"],
-[color-scheme="no-preference"],
-[color-scheme="normal"],
-[color-scheme="auto"],
-html:not([color-scheme]) {
-	--primary-1: var(--light-primary-1);
-	--primary-2: var(--light-primary-2);
-	--primary-3: var(--light-primary-3);
-	--primary-4: var(--light-primary-4);
-	--primary-5: var(--light-primary-5);
-	--primary-6: var(--light-primary-6);
-	--primary-7: var(--light-primary-7);
-	--primary-8: var(--light-primary-8);
-	--primary-9: var(--light-primary-9);
-	--primary-10: var(--light-primary-10);
-	--primary-11: var(--light-primary-11);
-	--primary-12: var(--light-primary-12);
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-	--primary: var(--light-primary);
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
 
-	--neutral-1: var(--light-neutral-1);
-	--neutral-2: var(--light-neutral-2);
-	--neutral-3: var(--light-neutral-3);
-	--neutral-4: var(--light-neutral-4);
-	--neutral-5: var(--light-neutral-5);
-	--neutral-6: var(--light-neutral-6);
-	--neutral-7: var(--light-neutral-7);
-	--neutral-8: var(--light-neutral-8);
-	--neutral-9: var(--light-neutral-9);
-	--neutral-10: var(--light-neutral-10);
-	--neutral-11: var(--light-neutral-11);
-	--neutral-12: var(--light-neutral-12);
-
-	--neutral-inverse-1: var(--dark-neutral-1);
-	--neutral-inverse-2: var(--dark-neutral-2);
-	--neutral-inverse-3: var(--dark-neutral-3);
-	--neutral-inverse-4: var(--dark-neutral-4);
-	--neutral-inverse-5: var(--dark-neutral-5);
-	--neutral-inverse-6: var(--dark-neutral-6);
-	--neutral-inverse-7: var(--dark-neutral-7);
-	--neutral-inverse-8: var(--dark-neutral-8);
-	--neutral-inverse-9: var(--dark-neutral-9);
-	--neutral-inverse-10: var(--dark-neutral-10);
-	--neutral-inverse-11: var(--dark-neutral-11);
-	--neutral-inverse-12: var(--dark-neutral-12);
-
-	--warm-1: var(--light-warm-1);
-	--warm-2: var(--light-warm-2);
-	--warm-3: var(--light-warm-3);
-	--warm-4: var(--light-warm-4);
-	--warm-5: var(--light-warm-5);
-	--warm-6: var(--light-warm-6);
-	--warm-7: var(--light-warm-7);
-	--warm-8: var(--light-warm-8);
-	--warm-9: var(--light-warm-9);
-	--warm-10: var(--light-warm-10);
-	--warm-11: var(--light-warm-11);
-	--warm-12: var(--light-warm-12);
-
-	--warm-inverse-1: var(--dark-warm-1);
-	--warm-inverse-2: var(--dark-warm-2);
-	--warm-inverse-3: var(--dark-warm-3);
-	--warm-inverse-4: var(--dark-warm-4);
-	--warm-inverse-5: var(--dark-warm-5);
-	--warm-inverse-6: var(--dark-warm-6);
-	--warm-inverse-7: var(--dark-warm-7);
-	--warm-inverse-8: var(--dark-warm-8);
-	--warm-inverse-9: var(--dark-warm-9);
-	--warm-inverse-10: var(--dark-warm-10);
-	--warm-inverse-11: var(--dark-warm-11);
-	--warm-inverse-12: var(--dark-warm-12);
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
 }
 
-[color-scheme="dark"] {
-	color-scheme: dark;
-	color: white;
+@layer utilities {
+	:root {
+		/* ==== Light ==== */
 
-	--primary-1: var(--dark-primary-1);
-	--primary-2: var(--dark-primary-2);
-	--primary-3: var(--dark-primary-3);
-	--primary-4: var(--dark-primary-4);
-	--primary-5: var(--dark-primary-5);
-	--primary-6: var(--dark-primary-6);
-	--primary-7: var(--dark-primary-7);
-	--primary-8: var(--dark-primary-8);
-	--primary-9: var(--dark-primary-9);
-	--primary-10: var(--dark-primary-10);
-	--primary-11: var(--dark-primary-11);
-	--primary-12: var(--dark-primary-12);
+		--light-warm-1: #faf4f4;
+		--light-warm-2: #ede6e6;
+		--light-warm-3: #d7cece;
+		--light-warm-4: #bcb2b2;
+		--light-warm-5: #a19797;
+		--light-warm-6: #8b8181;
+		--light-warm-7: #736969;
+		--light-warm-8: #5c5353;
+		--ligth-warm-9: #453d3d;
+		--light-warm-10: #342d2d;
+		--light-warm-11: #262020;
+		--light-warm-12: #201b1b;
 
-	--primary: var(--dark-primary);
+		--light-primary-1: #ffd9d9;
+		--light-primary-2: #ffcfc9;
+		--light-primary-3: #f8bab2;
+		--light-primary-4: #f2a29a;
+		--light-primary-5: #e3857f;
+		--light-primary-6: #d26a63;
+		--light-primary-7: #bc544d;
+		--light-primary-8: #a53f3a;
+		--light-primary-9: #892e29;
+		--light-primary-10: #72221d;
+		--light-primary-11: #5e1614;
+		--light-primary-12: #53110a;
 
-	--neutral-1: var(--dark-neutral-1);
-	--neutral-2: var(--dark-neutral-2);
-	--neutral-3: var(--dark-neutral-3);
-	--neutral-4: var(--dark-neutral-4);
-	--neutral-5: var(--dark-neutral-5);
-	--neutral-6: var(--dark-neutral-6);
-	--neutral-7: var(--dark-neutral-7);
-	--neutral-8: var(--dark-neutral-8);
-	--neutral-9: var(--dark-neutral-9);
-	--neutral-10: var(--dark-neutral-10);
-	--neutral-11: var(--dark-neutral-11);
-	--neutral-12: var(--dark-neutral-12);
+		--light-primary: var(--light-primary-9);
 
-	--neutral-inverse-1: var(--light-neutral-1);
-	--neutral-inverse-2: var(--light-neutral-2);
-	--neutral-inverse-3: var(--light-neutral-3);
-	--neutral-inverse-4: var(--light-neutral-4);
-	--neutral-inverse-5: var(--light-neutral-5);
-	--neutral-inverse-6: var(--light-neutral-6);
-	--neutral-inverse-7: var(--light-neutral-7);
-	--neutral-inverse-8: var(--light-neutral-8);
-	--neutral-inverse-9: var(--light-neutral-9);
-	--neutral-inverse-10: var(--light-neutral-10);
-	--neutral-inverse-11: var(--light-neutral-11);
-	--neutral-inverse-12: var(--light-neutral-12);
+		--light-neutral-1: #fbfcfd;
+		--light-neutral-2: #f8f9fa;
+		--light-neutral-3: #f1f3f5;
+		--light-neutral-4: #eceef0;
+		--light-neutral-5: #e6e8eb;
+		--light-neutral-6: #dfe3e6;
+		--light-neutral-7: #d7dbdf;
+		--light-neutral-8: #c1c8cd;
+		--light-neutral-9: #889096;
+		--light-neutral-10: #7e868c;
+		--light-neutral-11: #687076;
+		--light-neutral-12: #11181c;
 
-	--warm-1: var(--dark-warm-1);
-	--warm-2: var(--dark-warm-2);
-	--warm-3: var(--dark-warm-3);
-	--warm-4: var(--dark-warm-4);
-	--warm-5: var(--dark-warm-5);
-	--warm-6: var(--dark-warm-6);
-	--warm-7: var(--dark-warm-7);
-	--warm-8: var(--dark-warm-8);
-	--warm-9: var(--dark-warm-9);
-	--warm-10: var(--dark-warm-10);
-	--warm-11: var(--dark-warm-11);
-	--warm-12: var(--dark-warm-12);
+		/* ==== Dark ==== */
+		--dark-warm-1: #201b1b;
+		--dark-warm-2: #262020;
+		--dark-warm-3: #342d2d;
+		--dark-warm-4: #453d3d;
+		--dark-warm-5: #5c5353;
+		--dark-warm-6: #736969;
+		--dark-warm-7: #8b8181;
+		--dark-warm-8: #a19797;
+		--dark-warm-9: #bcb2b2;
+		--dark-warm-10: #d7cece;
+		--dark-warm-11: #ede6e6;
+		--dark-warm-12: #faf4f4;
 
-	--warm-inverse-1: var(--light-warm-1);
-	--warm-inverse-2: var(--light-warm-2);
-	--warm-inverse-3: var(--light-warm-3);
-	--warm-inverse-4: var(--light-warm-4);
-	--warm-inverse-5: var(--light-warm-5);
-	--warm-inverse-6: var(--light-warm-6);
-	--warm-inverse-7: var(--light-warm-7);
-	--warm-inverse-8: var(--light-warm-8);
-	--warm-inverse-9: var(--light-warm-9);
-	--warm-inverse-10: var(--light-warm-10);
-	--warm-inverse-11: var(--light-warm-11);
-	--warm-inverse-12: var(--light-warm-12);
-}
+		--dark-primary-12: var(--light-primary-1);
+		--dark-primary-11: var(--light-primary-2);
+		--dark-primary-10: var(--light-primary-3);
+		--dark-primary-9: var(--light-primary-4);
+		--dark-primary-8: var(--light-primary-5);
+		--dark-primary-7: var(--light-primary-6);
+		--dark-primary-6: var(--light-primary-7);
+		--dark-primary-5: var(--light-primary-8);
+		--dark-primary-4: var(--light-primary-9);
+		--dark-primary-3: var(--light-primary-10);
+		--dark-primary-2: var(--light-primary-11);
+		--dark-primary-1: var(--light-primary-12);
 
-[color-scheme="dark"] .shiki,
-[color-scheme="dark"] .shiki span {
-	color: var(--shiki-dark) !important;
-	/* Optional, if you also want font styles */
-	font-style: var(--shiki-dark-font-style) !important;
-	font-weight: var(--shiki-dark-font-weight) !important;
-	text-decoration: var(--shiki-dark-text-decoration) !important;
+		--dark-primary: var(--light-primary-5);
+
+		--dark-neutral-1: #151718;
+		--dark-neutral-2: #1a1d1e;
+		--dark-neutral-3: #202425;
+		--dark-neutral-4: #26292b;
+		--dark-neutral-5: #2b2f31;
+		--dark-neutral-6: #313538;
+		--dark-neutral-7: #3a3f42;
+		--dark-neutral-8: #4c5155;
+		--dark-neutral-9: #697177;
+		--dark-neutral-10: #787f85;
+		--dark-neutral-11: #9ba1a6;
+		--dark-neutral-12: #ecedee;
+
+		--line-height: 1.2rem;
+		--border-thickness: 2px;
+	}
+
+	[color-scheme="light"],
+	[color-scheme="no-preference"],
+	[color-scheme="normal"],
+	[color-scheme="auto"],
+	html:not([color-scheme]) {
+		--primary-1: var(--light-primary-1);
+		--primary-2: var(--light-primary-2);
+		--primary-3: var(--light-primary-3);
+		--primary-4: var(--light-primary-4);
+		--primary-5: var(--light-primary-5);
+		--primary-6: var(--light-primary-6);
+		--primary-7: var(--light-primary-7);
+		--primary-8: var(--light-primary-8);
+		--primary-9: var(--light-primary-9);
+		--primary-10: var(--light-primary-10);
+		--primary-11: var(--light-primary-11);
+		--primary-12: var(--light-primary-12);
+
+		--primary: var(--light-primary);
+
+		--neutral-1: var(--light-neutral-1);
+		--neutral-2: var(--light-neutral-2);
+		--neutral-3: var(--light-neutral-3);
+		--neutral-4: var(--light-neutral-4);
+		--neutral-5: var(--light-neutral-5);
+		--neutral-6: var(--light-neutral-6);
+		--neutral-7: var(--light-neutral-7);
+		--neutral-8: var(--light-neutral-8);
+		--neutral-9: var(--light-neutral-9);
+		--neutral-10: var(--light-neutral-10);
+		--neutral-11: var(--light-neutral-11);
+		--neutral-12: var(--light-neutral-12);
+
+		--neutral-inverse-1: var(--dark-neutral-1);
+		--neutral-inverse-2: var(--dark-neutral-2);
+		--neutral-inverse-3: var(--dark-neutral-3);
+		--neutral-inverse-4: var(--dark-neutral-4);
+		--neutral-inverse-5: var(--dark-neutral-5);
+		--neutral-inverse-6: var(--dark-neutral-6);
+		--neutral-inverse-7: var(--dark-neutral-7);
+		--neutral-inverse-8: var(--dark-neutral-8);
+		--neutral-inverse-9: var(--dark-neutral-9);
+		--neutral-inverse-10: var(--dark-neutral-10);
+		--neutral-inverse-11: var(--dark-neutral-11);
+		--neutral-inverse-12: var(--dark-neutral-12);
+
+		--warm-1: var(--light-warm-1);
+		--warm-2: var(--light-warm-2);
+		--warm-3: var(--light-warm-3);
+		--warm-4: var(--light-warm-4);
+		--warm-5: var(--light-warm-5);
+		--warm-6: var(--light-warm-6);
+		--warm-7: var(--light-warm-7);
+		--warm-8: var(--light-warm-8);
+		--warm-9: var(--light-warm-9);
+		--warm-10: var(--light-warm-10);
+		--warm-11: var(--light-warm-11);
+		--warm-12: var(--light-warm-12);
+
+		--warm-inverse-1: var(--dark-warm-1);
+		--warm-inverse-2: var(--dark-warm-2);
+		--warm-inverse-3: var(--dark-warm-3);
+		--warm-inverse-4: var(--dark-warm-4);
+		--warm-inverse-5: var(--dark-warm-5);
+		--warm-inverse-6: var(--dark-warm-6);
+		--warm-inverse-7: var(--dark-warm-7);
+		--warm-inverse-8: var(--dark-warm-8);
+		--warm-inverse-9: var(--dark-warm-9);
+		--warm-inverse-10: var(--dark-warm-10);
+		--warm-inverse-11: var(--dark-warm-11);
+		--warm-inverse-12: var(--dark-warm-12);
+	}
+
+	[color-scheme="dark"] {
+		color-scheme: dark;
+		color: white;
+
+		--primary-1: var(--dark-primary-1);
+		--primary-2: var(--dark-primary-2);
+		--primary-3: var(--dark-primary-3);
+		--primary-4: var(--dark-primary-4);
+		--primary-5: var(--dark-primary-5);
+		--primary-6: var(--dark-primary-6);
+		--primary-7: var(--dark-primary-7);
+		--primary-8: var(--dark-primary-8);
+		--primary-9: var(--dark-primary-9);
+		--primary-10: var(--dark-primary-10);
+		--primary-11: var(--dark-primary-11);
+		--primary-12: var(--dark-primary-12);
+
+		--primary: var(--dark-primary);
+
+		--neutral-1: var(--dark-neutral-1);
+		--neutral-2: var(--dark-neutral-2);
+		--neutral-3: var(--dark-neutral-3);
+		--neutral-4: var(--dark-neutral-4);
+		--neutral-5: var(--dark-neutral-5);
+		--neutral-6: var(--dark-neutral-6);
+		--neutral-7: var(--dark-neutral-7);
+		--neutral-8: var(--dark-neutral-8);
+		--neutral-9: var(--dark-neutral-9);
+		--neutral-10: var(--dark-neutral-10);
+		--neutral-11: var(--dark-neutral-11);
+		--neutral-12: var(--dark-neutral-12);
+
+		--neutral-inverse-1: var(--light-neutral-1);
+		--neutral-inverse-2: var(--light-neutral-2);
+		--neutral-inverse-3: var(--light-neutral-3);
+		--neutral-inverse-4: var(--light-neutral-4);
+		--neutral-inverse-5: var(--light-neutral-5);
+		--neutral-inverse-6: var(--light-neutral-6);
+		--neutral-inverse-7: var(--light-neutral-7);
+		--neutral-inverse-8: var(--light-neutral-8);
+		--neutral-inverse-9: var(--light-neutral-9);
+		--neutral-inverse-10: var(--light-neutral-10);
+		--neutral-inverse-11: var(--light-neutral-11);
+		--neutral-inverse-12: var(--light-neutral-12);
+
+		--warm-1: var(--dark-warm-1);
+		--warm-2: var(--dark-warm-2);
+		--warm-3: var(--dark-warm-3);
+		--warm-4: var(--dark-warm-4);
+		--warm-5: var(--dark-warm-5);
+		--warm-6: var(--dark-warm-6);
+		--warm-7: var(--dark-warm-7);
+		--warm-8: var(--dark-warm-8);
+		--warm-9: var(--dark-warm-9);
+		--warm-10: var(--dark-warm-10);
+		--warm-11: var(--dark-warm-11);
+		--warm-12: var(--dark-warm-12);
+
+		--warm-inverse-1: var(--light-warm-1);
+		--warm-inverse-2: var(--light-warm-2);
+		--warm-inverse-3: var(--light-warm-3);
+		--warm-inverse-4: var(--light-warm-4);
+		--warm-inverse-5: var(--light-warm-5);
+		--warm-inverse-6: var(--light-warm-6);
+		--warm-inverse-7: var(--light-warm-7);
+		--warm-inverse-8: var(--light-warm-8);
+		--warm-inverse-9: var(--light-warm-9);
+		--warm-inverse-10: var(--light-warm-10);
+		--warm-inverse-11: var(--light-warm-11);
+		--warm-inverse-12: var(--light-warm-12);
+	}
+
+	[color-scheme="dark"] .shiki,
+	[color-scheme="dark"] .shiki span {
+		color: var(--shiki-dark) !important;
+		/* Optional, if you also want font styles */
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
 }
 
 body {
@@ -265,11 +366,11 @@ body {
 	}
 
 	/* Override shiki background color to match my theme */
-	.shiki pre > span {
+	.shiki pre>span {
 		background-color: var(--warm-2);
 	}
 
-	.shiki > span {
+	.shiki>span {
 		background-color: var(--warm-1);
 	}
 
@@ -336,6 +437,7 @@ body {
 }
 
 @layer base {
+
 	:focus-visible,
 	[role="button"]:focus-visible,
 	[role="button"]:focus {
