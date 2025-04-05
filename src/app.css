@@ -265,11 +265,11 @@ body {
 	}
 
 	/* Override shiki background color to match my theme */
-	.shiki pre>span {
+	.shiki pre > span {
 		background-color: var(--warm-2);
 	}
 
-	.shiki>span {
+	.shiki > span {
 		background-color: var(--warm-1);
 	}
 
@@ -336,7 +336,6 @@ body {
 }
 
 @layer base {
-
 	:focus-visible,
 	[role="button"]:focus-visible,
 	[role="button"]:focus {

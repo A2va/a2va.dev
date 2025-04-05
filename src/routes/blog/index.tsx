@@ -79,7 +79,10 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 
 export default function Blog() {
 	const visiblePosts = createMemo(() =>
-		posts.filter((post) => post.date <= new Date() && !post.unpublished),
+		posts
+			.filter((post) => post.date <= new Date() && !post.unpublished)
+			.sort((a, b) => a.date.getTime() - b.date.getTime())
+			.reverse(),
 	);
 	return (
 		<Page

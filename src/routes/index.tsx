@@ -7,17 +7,18 @@ const PROJECTS: Project[] = [
 	{
 		name: "XMake",
 		url: "https://xmake.io",
-		description: "A cross-platform build utility based on the Lua language that provides a Cargo like experience for C++. I'm one of its contributors since 2022.",
+		description:
+			"A cross-platform build utility based on the Lua language that provides a Cargo like experience for C++. I'm one of its contributors since 2022.",
 		logo: "projects/xmake.svg",
 	},
 	{
 		name: "XMake-Rs",
 		url: "https://github.com/A2va/xmake-rs",
-		description: "A build dependency for running the xmake build tool to compile native library.",
+		description:
+			"A build dependency for running the xmake build tool to compile native library.",
 		logo: "projects/xmake-rs.svg",
-	}
-]
-
+	},
+];
 
 export default function Home() {
 	return (
@@ -63,7 +64,7 @@ export default function Home() {
 				</Typography.Display>
 				<div class="mt-8 grid w-full grid-cols-1 gap-5">
 					<For each={PROJECTS}>
-						{project => <ProjectCard project={project} />}
+						{(project) => <ProjectCard project={project} />}
 					</For>
 				</div>
 			</section>

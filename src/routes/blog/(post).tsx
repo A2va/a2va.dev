@@ -20,7 +20,6 @@ const getPostMeta = query(async (slug: string) => {
 	"use server";
 	const post = postsMap.get(slug);
 	if (!post) {
-		// throw redirect("/404");
 		throw new Error("Post not found");
 	}
 
@@ -28,13 +27,11 @@ const getPostMeta = query(async (slug: string) => {
 	const isUnpublished = post.unpublished;
 
 	if ((isFuturePost || isUnpublished) && __APP_NODE_ENV === "production") {
-		// throw redirect("/404");
 		throw new Error("Post is not published");
 	}
 
 	return post;
 }, "slug");
-
 
 export default function BlogEntry(props: Readonly<RouteSectionProps>) {
 	const location = useLocation();
