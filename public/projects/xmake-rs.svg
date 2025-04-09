@@ -33,10 +33,6 @@
 			filter:url(#dropshadow);
 		}
 	</style>
-
-  <!-- 1) White background so that everything outside Rust’s shapes remains white -->
-  <!-- <rect width="106" height="106" fill="white"/> -->
-
   <defs>
 	<!-- <filter id="dropshadow">
 		<feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>

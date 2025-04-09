@@ -22,7 +22,7 @@ export function ProjectCard(props: Readonly<ProjectCardProps>): JSX.Element {
 				id={hyphenatedSlug}
 				aria-labelledby={`${hyphenatedSlug}-title`}
 				class={
-					"flex gap-4 group-hover:bg-warm-5 group-focus:bg-warm-5 group-focus:outline group-focus:outline-2 group-focus:outline-offset-2"
+					"flex gap-4 group-hover:bg-warm-4 group-focus:bg-warm-4 group-focus:outline group-focus:outline-2 group-focus:outline-offset-2"
 				}
 				{...rest}
 			>
