@@ -76,10 +76,8 @@
 
 	--color-text-secondary: var(--text-secondary);
 
-	--font-sans: Inter,
-	sans-serif;
-	--font-mono: JetBrains Mono,
-	monospace;
+	--font-sans: Inter, sans-serif;
+	--font-mono: JetBrains Mono, monospace;
 }
 
 /*
@@ -91,7 +89,6 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-
 	*,
 	::after,
 	::before,
@@ -106,9 +103,9 @@
 		/* ==== Light ==== */
 
 		--light-warm-1: #faf4f4;
-		--light-warm-2: #ede6e6;
-		--light-warm-3: #d7cece;
-		--light-warm-4: #bcb2b2;
+		--light-warm-2: #f0e9e9;
+		--light-warm-3: #e3dada;
+		--light-warm-4: #cabfbf;
 		--light-warm-5: #a19797;
 		--light-warm-6: #8b8181;
 		--light-warm-7: #736969;
@@ -155,9 +152,9 @@
 		--dark-warm-6: #736969;
 		--dark-warm-7: #8b8181;
 		--dark-warm-8: #a19797;
-		--dark-warm-9: #bcb2b2;
-		--dark-warm-10: #d7cece;
-		--dark-warm-11: #ede6e6;
+		--dark-warm-9: #cabfbf;
+		--dark-warm-10: #e3dada;
+		--dark-warm-11: #f0e9e9;
 		--dark-warm-12: #faf4f4;
 
 		--dark-primary-12: var(--light-primary-1);
@@ -367,11 +364,11 @@ body {
 	}
 
 	/* Override shiki background color to match my theme */
-	.shiki pre>span {
+	.shiki pre > span {
 		background-color: var(--warm-2);
 	}
 
-	.shiki>span {
+	.shiki > span {
 		background-color: var(--warm-1);
 	}
 
@@ -438,7 +435,6 @@ body {
 }
 
 @layer base {
-
 	:focus-visible,
 	[role="button"]:focus-visible,
 	[role="button"]:focus {
