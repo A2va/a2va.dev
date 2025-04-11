@@ -35,7 +35,7 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 						title={post.title}
 						src={post.image?.src}
 						alt={post.image?.alt ?? ""}
-						class="aspect-5/6 w-full h-full rounded-xl object-cover block"
+						class="aspect-5/6 w-full h-full rounded-xl object-contain object-center"
 					/>
 				</Show>
 				<Typography.Paragraph variant={"subdued"} class="mt-3">
@@ -49,7 +49,7 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 				</Typography.Paragraph>
 				<div class="mt-1">
 					<Typography.Heading
-						size={"lg"}
+						size={"sm"}
 						id={`${hyphenatedSlug}-title`}
 						hideAnchor
 					>
@@ -60,6 +60,7 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 							variant={"subdued"}
 							size={"sm"}
 							class="mt-2 truncate"
+							title={post.description}
 						>
 							{post.description}
 						</Typography.Paragraph>

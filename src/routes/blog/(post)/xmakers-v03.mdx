@@ -1,0 +1,135 @@
+---
+title: "When Cargo Meets XMake: A Better Way to Build Together"
+description: Easily integrate C/C++ code into your Rust projects using XMake. In this post, I dive into how xmake-rs automates linking, handles dependencies, without the usual manual setup.
+tags: [rust, xmake, c++, c, build system]
+date: 2025-04-11
+image: { src: /projects/xmake-rs.svg, alt: "" }
+author: A2va
+---
+
+Note: This blog post assumes some basic knowledge of xmake, so if you see something you don't understand, feel free to check out the [xmake documentation](https://xmake.io/)
+
+# Origins of xmake-rs
+
+About two years ago, I started a project called [xmake-rs](https://github.com/A2va/xmake-rs) to integrate C/C++ projects into a rust codebase using cargo build scripts and xmake. While it worked well, it didn't seem like much of an improvement over something like [cmake-rs](https://github.com/rust-lang/cmake-rs), because both of those tools require the user to provide cargo with the library they want to link to.
+
+This was also the case with xmake-rs, so it looked something like this:
+
+```rust
+let dst = xmake::build("libfoo");
+println!("cargo:rustc-link-search=native={}", dst.display());
+println!("cargo:rustc-link-lib=static=foo");
+```
+
+The xmake-rs crate returned the folder where the library was installed, and with this information, users can link their libraries correctly.
+
+This has a pretty big downside, because for every package users need, they would have to add it to the link chain, in the correct order. And what if a package depends on many dependencies? Yes, those would have to be linked as well.
+
+# **A First Proof of Concept**
+
+Luckily for us, xmake has a scripting language that is not only more powerful than cmake's own DSL because it is based on the Lua language, but is also backed up with methods and APIs.
+
+It took very little time to write the first proof of concept, which went something like this
+
+```lua
+function _get_values_from_target(target, name)
+    local values = table.wrap(target:get(name))
+    table.join2(values, target:get_from_opts(name))
+    table.join2(values, target:get_from_pkgs(name))
+    table.join2(values, target:get_from_deps(name, {interface = true}))
+    return table.unique(values)
+end
+
+local links = _get_values_from_target(target, "links")
+```
+
+This was a snippet that could be found in the xmake codebase at the time. However, shortly thereafter, Ruki (the xmake developer) introduced a new feature for ordering link dependencies. While this was a great improvement for xmake, it completely changed how links were handled internally, effectively breaking my original approach.
+
+# Automating the Linking Process
+
+This meant I had to rethink my entire strategy. Instead of manually managing link order, I wanted to make the process as seamless as possible, allowing users to integrate external libraries with minimal configuration. 
+
+Ideally, if the user doesn't set any targets, it should automatically get the available targets. At first sight the target detection seems to be quite easy to do, you collect all static/shared targets, compute their relationship (which one is a dependency of the other) and you are good to go.
+
+But there is a problem, these targets are only libraries, and usually the link only happens with a binary. So a binary target has to be created, unfortunately xmake doesn't support this out of the box, but we can work around this by cloning an already existing target.
+
+```lua
+function _get_binary_target(targets)
+
+    -- take the first target as the fake target
+    local fake_target = targets[1]:clone()
+    local hashed_key =  hash.sha256(bytes(utils.get_cache_key(targets)))
+    fake_target:name_set("xmake-rs-" .. string.sub(hashed_key, 1, 8))
+    fake_target:set("kind", "binary")
+
+    -- reset some info
+    fake_target:set("deps", nil)
+    fake_target:set("packages", nil)
+    fake_target:set("rules", nil)
+    fake_target:set("links", nil)
+    fake_target:set("syslinks", nil)
+    fake_target:set("frameworks", nil)
+    fake_target:set("linkdirs", nil)
+    fake_target:set("runenvs", nil)
+
+    for _, target in ipairs(targets) do
+        fake_target:add("deps", target:name())
+    end
+
+	  -- ...
+
+    project.target_add(fake_target)
+
+    -- load the newly made target
+    config.load()
+    project.load_targets()
+
+    return fake_target
+end
+```
+
+The whole trick is not only to clone an existing target, but also to reset some fields of the targets to make sure there is no problem, then I had to copy a part of the xmake builder to compute the link order on this target.
+
+At this point it should be okay to pass the link to cargo, right? Maybe, but if you look at the first snippet of this post, the library type is passed to cargo via `println!`, so I added a kind detection for each link, using `find_library`.
+
+# Handling the C++ Standard Library
+
+With type detection in place, linking works well for most targets and packages. However, there's another big challenge, which is how to handle the C++ standard library (STL).
+
+Well, to know if the STL is being used, you have to detect it, so that's what I did. The main gist is to iterate on all C++ source batches for both modules and regular files. Module information is stored in the xmake cache, and for regular files I had to implement an include scanner.
+
+```lua
+function _stl_info(targets)
+    local is_cxx_used = false
+    local is_stl_used = false
+
+    for _, target in pairs(targets) do
+        local sourcebatches, _ = target:sourcebatches()
+        local is_cxx = sourcebatches["c++.build"] ~= nil
+        local is_cxx_modules = sourcebatches["c++.build.modules.builder"] ~= nil
+
+        is_cxx_used = is_cxx or is_cxx_modules
+        if is_cxx then
+            is_stl_used = _stl_usage(target, sourcebatches["c++.build"], {batchjobs = true})
+        end
+
+        if is_cxx_modules then
+            is_stl_used = is_stl_used or _stl_usage(target, sourcebatches["c++.build.modules.builder"], {modules = true, batchjobs = true})
+        end
+
+        if is_stl_used then
+            break
+        end
+    end
+
+    return {cxx_used = is_cxx_used, stl_used = is_stl_used}
+end
+```
+
+Once the use of the C++ runtime is identified, we can either link to the user's desired runtime or an appropriate runtime depending on the platform (for example, stdc++ for Linux or c++ on Android).
+
+# Future Plans for xmake-rs
+
+Going forward, my focus for the next v0.3 release will be to ensure that Cargo correctly detects when a rebuild is needed, using rerun-if-changed to trigger recompilation only when relevant files are changed.
+
+I also plan to improve the integration between Rust and C++ by adding ways to automatically generate Rust bindings. I plan to add support for tools like bindgen, cxx, and autocxx to allow users to interact seamlessly with C++ code.

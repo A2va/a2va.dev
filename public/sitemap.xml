@@ -2,19 +2,25 @@
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         <url>
 			<loc>https://a2va.dev/blog/test-mdx</loc>
-			<lastmod>2025-03-06T11:52:21.177Z</lastmod>
+			<lastmod>2025-04-05T17:48:26.836Z</lastmod>
+			<changefreq>monthly</changefreq>
+			<priority>0.8</priority>
+		</url>
+        <url>
+			<loc>https://a2va.dev/blog/xmakers-v03</loc>
+			<lastmod>2025-04-11T09:31:45.731Z</lastmod>
 			<changefreq>monthly</changefreq>
 			<priority>0.8</priority>
 		</url>
         <url>
 			<loc>https://a2va.dev/blog</loc>
-			<lastmod>2025-03-13T10:04:50.072Z</lastmod>
+			<lastmod>2025-04-11T09:20:37.417Z</lastmod>
 			<changefreq>monthly</changefreq>
 			<priority>0.8</priority>
 		</url>
         <url>
 			<loc>https://a2va.dev/</loc>
-			<lastmod>2025-03-13T10:32:33.020Z</lastmod>
+			<lastmod>2025-04-05T17:48:26.837Z</lastmod>
 			<changefreq>monthly</changefreq>
 			<priority>0.8</priority>
 		</url>

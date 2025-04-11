@@ -9,6 +9,10 @@ import { matter } from "vfile-matter";
 import type { Plugin, ResolvedConfig } from "vite";
 import { type Route, getRoutes } from "./getRoutes";
 
+function normalizePath(p: string): string {
+	return path.normalize(p).replace(/\\/g, "/");
+}
+
 function sitemapGen(routes: Route[], baseUrl: string, rootPath: string) {
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -40,9 +44,12 @@ function blogPostGen(routes: Route[], nodeEnv: string): Set<string> {
 		.map((route) => {
 			const f = readSync(path.resolve("src/routes/blog/(post)", route.file));
 			matter(f);
+			const parsedPath = path.parse(
+				path.relative("src/routes/blog/(post)", route.file),
+			);
 			return {
 				...(f.data.matter as object),
-				slug: path.parse(route.file).name,
+				slug: normalizePath(path.join(parsedPath.dir, parsedPath.name)),
 			} as { date: string; slug: string; unpublished?: boolean };
 		})
 		.filter((post) => {
