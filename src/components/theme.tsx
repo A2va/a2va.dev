@@ -46,23 +46,25 @@ export function ColorModeSwitcher(
 	};
 
 	return (
-		<IconButton
-			id={props.id}
-			icon={() =>
-				isDark() ? (
-					<Sun aria-label="Toggle theme" />
-				) : (
-					<Moon aria-label="Toggle theme" />
-				)
-			}
-			title="Toggle theme"
-			aria-label={isDark() ? "Enable light mode" : "Enable dark mode"}
-			aria-checked={isDark()}
-			role="switch"
-			size={"md"}
-			variant={"tertiary"}
-			class={cx("h-12 w-12 duration-200 ease-in-out", props.class)}
-			onclick={onThemeToggle}
-		/>
+		<div class={props.class}>
+			<IconButton
+				id={props.id}
+				icon={() =>
+					isDark() ? (
+						<Sun aria-label="Toggle theme" />
+					) : (
+						<Moon aria-label="Toggle theme" />
+					)
+				}
+				title="Toggle theme"
+				aria-label={isDark() ? "Enable light mode" : "Enable dark mode"}
+				aria-checked={isDark()}
+				role="switch"
+				size={"md"}
+				variant={"tertiary"}
+				class="h-12 w-12 duration-200 ease-in-out"
+				onclick={onThemeToggle}
+			/>
+		</div>
 	);
 }
