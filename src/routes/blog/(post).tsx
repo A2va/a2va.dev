@@ -17,7 +17,7 @@ import NotFound from "~/routes/[...404]";
 import { hyphenate } from "~/utils/hyphenate";
 
 const getPostMeta = query(async (slug: string) => {
-	"use server";
+	// "use server";
 	const post = postsMap.get(slug);
 	if (!post) {
 		throw new Error("Post not found");
