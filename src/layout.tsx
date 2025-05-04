@@ -75,7 +75,7 @@ export function Footer() {
 					</Typography.Paragraph>
 				</div>
 				<div class="flex justify-center gap-6 sm:items-center md:gap-10">
-					<Anchor href={"#main-content"} variant="distinguished">
+					<Anchor onClick={() => window.scrollTo(0, 0)} variant="distinguished">
 						Back to top
 					</Anchor>
 				</div>

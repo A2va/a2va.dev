@@ -34,7 +34,7 @@ export interface AnchorProps
 	extends PolymorphicComponent<HTMLAnchorElement>,
 		AnchorBaseProps,
 		JSX.AnchorHTMLAttributes<HTMLAnchorElement> {
-	href: string;
+	href?: string;
 	external?: boolean;
 	noStyle?: boolean;
 	interactive?: boolean;
