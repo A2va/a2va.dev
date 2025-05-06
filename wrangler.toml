@@ -1,0 +1,6 @@
+name = "a2va-dev"
+compatibility_date = "2025-05-06"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+upload = { dir = "./dist" }
