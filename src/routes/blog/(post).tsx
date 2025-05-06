@@ -59,6 +59,14 @@ export default function BlogEntry(props: Readonly<RouteSectionProps>) {
 								</Typography.Paragraph>
 								<Typography.Paragraph variant="subdued" size="sm" class="mt-5">
 									Written by <Anchor href={__APP_WEBSITE}>{m().author}</Anchor>
+									<span class="mx-2">·</span>
+									<time dateTime={m().date.toISOString()}>
+										{m().date.toLocaleDateString("en-EN", {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										})}
+									</time>
 								</Typography.Paragraph>
 							</section>
 							<div class="mt-1v">
