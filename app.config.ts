@@ -21,7 +21,7 @@ const { default: mdx } = pkg;
 
 const defineString = (str?: string) => `"${str || "unknown"}"`;
 
-const NITRO_PRESET = process.env.SERVER_PRESET || "cloudflare-pages-static";
+const NITRO_PRESET = process.env.SERVER_PRESET || "cloudflare_pages";
 const WEBSITE = "https://a2va.dev";
 
 export default defineConfig({
