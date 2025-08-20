@@ -14,12 +14,14 @@ import { Page } from "~/components/page";
 import { postsMap } from "~/data/posts";
 
 import NotFound from "~/routes/[...404]";
+
 import { hyphenate } from "~/utils/hyphenate";
 
 const getPostMeta = query(async (slug: string) => {
 	"use server";
 	const post = postsMap.get(slug);
 	if (!post) {
+		// throw redirect("/404");
 		throw new Error("Post not found");
 	}
 
@@ -27,6 +29,7 @@ const getPostMeta = query(async (slug: string) => {
 	const isUnpublished = post.unpublished;
 
 	if ((isFuturePost || isUnpublished) && __APP_NODE_ENV === "production") {
+		// throw redirect("/404");
 		throw new Error("Post is not published");
 	}
 
@@ -50,26 +53,18 @@ export default function BlogEntry(props: Readonly<RouteSectionProps>) {
 				{(m) => (
 					<Page title={m().title} description={m().description}>
 						<article>
-							<section class="mt-12 pb-10">
+							<section class="mt-12 pb-12">
 								<Typography.Display id={hyphenate(m().title)}>
 									{m().title}
 								</Typography.Display>
-								<Typography.Paragraph variant="subdued" size="lg" class="mt-8">
+								<Typography.Paragraph variant="subdued" size="lg" class="mt-10">
 									{m().description}
 								</Typography.Paragraph>
-								<Typography.Paragraph variant="subdued" size="sm" class="mt-5">
+								<Typography.Paragraph variant="subdued" size="sm" class="mt-6">
 									Written by <Anchor href={__APP_WEBSITE}>{m().author}</Anchor>
-									<span class="mx-2">·</span>
-									<time dateTime={m().date.toISOString()}>
-										{m().date.toLocaleDateString("en-EN", {
-											year: "numeric",
-											month: "long",
-											day: "numeric",
-										})}
-									</time>
 								</Typography.Paragraph>
 							</section>
-							<div class="mt-1v">
+							<div class="prose prose-lg max-w-none">
 								<MDXProvider components={MdxComponents}>
 									{props.children}
 								</MDXProvider>

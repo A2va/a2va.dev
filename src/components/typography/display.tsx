@@ -18,10 +18,10 @@ export const displayStyles = cva(
 		},
 		variants: {
 			size: {
-				lg: ["text-5xl sm:text-8xl"],
-				md: ["text-4xl sm:text-6xl"],
-				sm: ["text-3xl sm:text-5xl"],
-				xs: ["text-2xl sm:text-4xl"],
+				lg: ["text-5xl sm:text-8xl", "leading-none"],
+				md: ["text-4xl sm:text-6xl", "leading-none"],
+				sm: ["text-3xl sm:text-5xl", "leading-tight"],
+				xs: ["text-2xl sm:text-4xl", "leading-tight"],
 			},
 			variant: {
 				default: ["text-inherit"],

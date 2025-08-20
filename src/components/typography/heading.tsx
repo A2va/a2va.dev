@@ -16,12 +16,12 @@ export const headingStyles = cva(["heading", "font-semibold leading-tight"], {
 	},
 	variants: {
 		size: {
-			xxl: ["text-4xl sm:text-5xl"],
-			xl: ["text-3xl sm:text-4xl"],
-			lg: ["text-2xl sm:text-3xl"],
-			md: ["text-xl sm:text-2xl"],
-			sm: ["text-lg sm:text-xl"],
-			xs: ["text-base sm:text-lg"],
+			xxl: ["text-4xl sm:text-5xl", "leading-tight"],
+			xl: ["text-3xl sm:text-4xl", "leading-tight"],
+			lg: ["text-2xl sm:text-3xl", "leading-snug"],
+			md: ["text-xl sm:text-2xl", "leading-snug"],
+			sm: ["text-lg sm:text-xl", "leading-snug"],
+			xs: ["text-base sm:text-lg", "leading-normal"],
 		},
 		variant: {
 			default: ["text-inherit"],

@@ -67,17 +67,17 @@ export function Pre(props: PreProps) {
 	};
 
 	return (
-		<div class="pt-1 pb-2">
+		<div class="my-8">
 			<div class="rounded-md overflow-hidden pre-container group">
 				<Show when={props.file}>
-					<div class="flex pl-1 bg-warm-3 justify-between px-1 leading-1">
+					<div class="flex pl-3 bg-warm-3 justify-between px-3 py-2">
 						<Text class="font-bold">{props.file?.replace(/"/g, "")}</Text>
 					</div>
 				</Show>
-				<div class="bg-warm-2 pl-1 relative">
+				<div class="bg-warm-2 pl-3 relative">
 					<div
 						class={cx(
-							"absolute top-1 right-1 transition-opacity duration-200",
+							"absolute top-2 right-2 transition-opacity duration-200",
 							isSelected() || isScrolling() ? "opacity-0" : "opacity-100",
 						)}
 					>
@@ -90,7 +90,7 @@ export function Pre(props: PreProps) {
 					</div>
 					<pre
 						class={cx(
-							"shiki overflow-x-auto",
+							"shiki overflow-x-auto py-4 pr-4",
 							props.lines?.replace(/['"]+/g, "") === "true" ? "code-lines" : "",
 						)}
 						style={{ "--starting-line": props.start?.replace(/['"]+/g, "") }}

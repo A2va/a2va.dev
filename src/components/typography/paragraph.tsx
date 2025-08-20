@@ -13,8 +13,8 @@ const paragraphStyles = cva("paragraph", {
 	},
 	variants: {
 		size: {
-			lg: ["text-lg", "leading-tight"],
-			md: ["text-base", "leading-tight"],
+			lg: ["text-lg", "leading-normal"],
+			md: ["text-base", "leading-normal"],
 			sm: ["text-sm", "leading-tight"],
 			xs: ["text-xs", "leading-tight"],
 		},

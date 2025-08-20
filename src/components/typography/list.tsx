@@ -6,15 +6,15 @@ import { defaultTo } from "~/utils/default-to";
 import type { PolymorphicComponent } from "~/utils/types";
 
 type ListBaseProps = VariantProps<typeof listStyles>;
-const listStyles = cva(["list", "space-y-2 list-outside"], {
+const listStyles = cva(["list", "space-y-3 list-outside"], {
 	defaultVariants: {
 		variant: "default",
 	},
 	variants: {
 		variant: {
-			default: ["list-disc pl-[1.75rem]"],
-			ordered: ["list-decimal pl-[1.75rem]"],
-			tasks: ["list-none pl-[0.5rem]"],
+			default: ["list-disc pl-7"],
+			ordered: ["list-decimal pl-7"],
+			tasks: ["list-none pl-2"],
 		},
 	},
 });

@@ -29,7 +29,7 @@ function Subtree(props: TreeProps) {
 
 export function Tree(props: Readonly<TreeProps>): JSX.Element {
 	return (
-		<ul class="tree mb-5 font-mono [&>li>span]:font-bold">
+		<ul class="tree mb-8 font-mono [&>li>span]:font-bold">
 			<Subtree tree={props.tree} />
 		</ul>
 	);

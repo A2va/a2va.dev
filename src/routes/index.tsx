@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 import { Anchor, Page, Typography } from "~/components";
 import { ProjectCard } from "~/components/project-card";
-import { Project } from "~/utils/types";
+import { type Project } from "~/utils/types";
 
 const PROJECTS: Project[] = [
 	{
@@ -48,7 +48,7 @@ export default function Home() {
 					comes from, inspired by the French phrase "à tout va", which literally
 					means "in all directions".
 				</Typography.Paragraph>
-				<Typography.Paragraph size="lg" variant="subdued" class="mt-5">
+				<Typography.Paragraph size="lg" variant="subdued" class="mt-6">
 					In my spare time, I'm also a contributor to many open source projects,
 					but mainly to{" "}
 					<Anchor href="https://xmake.io" external>

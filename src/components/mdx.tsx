@@ -22,22 +22,22 @@ export const MdxComponents = {
 		<Anchor external={isExternalLink(props.href)} {...props} />
 	),
 	h1: (props: Readonly<HeadingProps>) => (
-		<Typography.Heading size={"xxl"} class="mb-4 mt-0" {...props} />
+		<Typography.Heading size={"xxl"} class="mb-6 mt-0" {...props} />
 	),
 	h2: (props: Readonly<HeadingProps>) => (
-		<Typography.Heading size={"xl"} class="mb-4 mt-10" {...props} />
+		<Typography.Heading size={"xl"} class="mb-5 mt-12" {...props} />
 	),
 	h3: (props: Readonly<HeadingProps>) => (
 		<Typography.Heading size={"lg"} class="mb-4 mt-10" {...props} />
 	),
 	h4: (props: Readonly<HeadingProps>) => (
-		<Typography.Heading size={"md"} class="mb-4 mt-10" {...props} />
+		<Typography.Heading size={"md"} class="mb-3 mt-8" {...props} />
 	),
 	h5: (props: Readonly<HeadingProps>) => (
-		<Typography.Heading size={"sm"} class="mb-2 mt-8" {...props} />
+		<Typography.Heading size={"sm"} class="mb-3 mt-6" {...props} />
 	),
 	h6: (props: Readonly<HeadingProps>) => (
-		<Typography.Heading size={"xs"} class="mb-2 mt-6" {...props} />
+		<Typography.Heading size={"xs"} class="mb-2 mt-5" {...props} />
 	),
 	hr: Divider,
 	p: (props: Readonly<ParagraphProps>) => (
@@ -47,17 +47,17 @@ export const MdxComponents = {
 	em: Typography.Emphasis,
 	li: Typography.ListItem,
 	ul: (props: Readonly<ListProps>) => (
-		<Typography.List class="mb-5" {...props} />
+		<Typography.List class="mb-6" {...props} />
 	),
 	ol: (props: Readonly<ListProps>) => (
-		<Typography.List as="ol" class="mb-5 ordered-list" {...props} />
+		<Typography.List as="ol" class="mb-6 ordered-list" {...props} />
 	),
 	img: (props: Readonly<ImageProps>) => (
 		<Image
 			{...props}
 			showCaption
 			class="rounded-xl"
-			containerClass="mb-5"
+			containerClass="mb-8"
 			center
 		/>
 	),
