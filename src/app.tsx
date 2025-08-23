@@ -31,19 +31,14 @@ export default function App() {
 		<Router
 			root={(props) => (
 				<>
-					<div
-						id="wrapping-div"
-						class="mx-auto flex min-h-screen max-w-4xl flex-col"
+					<Header />
+					<main
+						id="main-content"
+						class="mx-auto flex flex-1 min-h-screen max-w-4xl flex-col container px-5 transition-[max-width] duration-200 ease-in-out"
 					>
-						<Header />
-						<main
-							id="main-content"
-							class="container mx-auto flex-1 px-5 transition-[max-width] duration-200 ease-in-out"
-						>
-							<Suspense>{props.children}</Suspense>
-						</main>
-						<Footer />
-					</div>
+						<Suspense>{props.children}</Suspense>
+					</main>
+					<Footer />
 				</>
 			)}
 		>

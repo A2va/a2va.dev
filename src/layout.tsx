@@ -33,30 +33,35 @@ function NavLink(props: NavLinkProps) {
 
 export function Header() {
 	return (
-		<header
-			id="header"
-			class="sticky top-0 bg-warm-1 z-50 container mx-auto p-5 transition-[max-width] duration-200 ease-in-out"
+		<div
+			class="sticky top-0 z-50 w-full
+			bg-warm-1 shadow-sm transition-colors duration-150 ease-in-out"
 		>
-			<nav
-				id="main-nav"
-				aria-label="Main"
-				class="sticky flex flex-col justify-between gap-4 sm:flex-row sm:items-center"
+			<header
+				id="header"
+				class="sticky top-0 z-50 container mx-auto p-5 transition-[max-width] duration-200 ease-in-out backdrop-blur-sm"
 			>
-				<div class="flex items-center justify-between">
-					<a href="/" title="Home">
-						<At class="h-9 w-9 fill-primary" />
-					</a>
-					<ColorModeSwitcher id="theme-toggle-mobile" class="sm:hidden" />
-				</div>
-				<div class="flex flex-1 items-center gap-4 sm:justify-end">
-					<ul class="flex flex-1 justify-center items-center gap-6">
-						<NavLink href="/" label="Home" />
-						<NavLink href="/blog" label="Blog" />
-					</ul>
-					<ColorModeSwitcher id="theme-toggle" class="hidden sm:block" />
-				</div>
-			</nav>
-		</header>
+				<nav
+					id="main-nav"
+					aria-label="Main"
+					class="sticky flex flex-col justify-between gap-4 sm:flex-row sm:items-center"
+				>
+					<div class="flex items-center justify-between">
+						<a href="/" title="Home">
+							<At class="h-9 w-9 fill-primary" />
+						</a>
+						<ColorModeSwitcher id="theme-toggle-mobile" class="sm:hidden" />
+					</div>
+					<div class="flex flex-1 items-center gap-4 sm:justify-end">
+						<ul class="flex flex-1 justify-center items-center gap-6">
+							<NavLink href="/" label="Home" />
+							<NavLink href="/blog" label="Blog" />
+						</ul>
+						<ColorModeSwitcher id="theme-toggle" class="hidden sm:block" />
+					</div>
+				</nav>
+			</header>
+		</div>
 	);
 }
 
