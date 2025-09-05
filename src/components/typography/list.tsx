@@ -1,8 +1,8 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-import { defaultTo } from "~/utils/default-to";
+import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
 
 type ListBaseProps = VariantProps<typeof listStyles>;
@@ -31,7 +31,7 @@ export function List(
 		"class",
 	]);
 
-	const combinedClasses = cx(classFromProps, rest.className);
+	const combinedClasses = cn(classFromProps, rest.className);
 	const variant = combinedClasses?.includes("contains-task-list")
 		? "tasks"
 		: as === "ol"
@@ -41,7 +41,7 @@ export function List(
 	return (
 		<Dynamic
 			component={defaultTo("ul", as)}
-			class={cx(listStyles({ variant }), classFromProps)}
+			class={cn(listStyles({ variant }), classFromProps)}
 			{...rest}
 		>
 			{props.children}
@@ -70,7 +70,7 @@ export function ListItem(props: Readonly<ListProps>): JSX.Element {
 	return (
 		<Dynamic
 			component={defaultTo("li", as)}
-			class={cx(listItemStyles(), className, "list")}
+			class={cn(listItemStyles(), className, "list")}
 			{...rest}
 		>
 			{props.children}

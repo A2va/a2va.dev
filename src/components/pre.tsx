@@ -1,10 +1,10 @@
-import { cx } from "class-variance-authority";
 import { type JSX, Show, createSignal, onMount } from "solid-js";
 import { isServer } from "solid-js/web";
 import { IconButton } from "./button";
 import { Copy } from "./icons";
 
 import { Text } from "./typography/text";
+import { cn } from "~/utils/cn";
 
 export interface PreProps extends JSX.HTMLAttributes<HTMLPreElement> {
 	file?: string;
@@ -76,7 +76,7 @@ export function Pre(props: PreProps) {
 				</Show>
 				<div class="bg-warm-2 pl-3 relative">
 					<div
-						class={cx(
+						class={cn(
 							"absolute top-2 right-2 transition-opacity duration-200",
 							isSelected() || isScrolling() ? "opacity-0" : "opacity-100",
 						)}
@@ -89,7 +89,7 @@ export function Pre(props: PreProps) {
 						/>
 					</div>
 					<pre
-						class={cx(
+						class={cn(
 							"shiki overflow-x-auto py-4 pr-4",
 							props.lines?.replace(/['"]+/g, "") === "true" ? "code-lines" : "",
 						)}

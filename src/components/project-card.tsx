@@ -2,7 +2,7 @@ import { JSX, Match, Show, splitProps, Switch } from "solid-js";
 
 import { Anchor, Badge, Card, Image, Typography } from "~/components";
 import { hyphenate } from "~/utils/hyphenate";
-import { Project } from "~/utils/types";
+import type { Project } from "~/utils/types";
 
 const ABBREVIATIONS = {
 	WIP: "Work in progress",

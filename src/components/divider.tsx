@@ -1,5 +1,7 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, splitProps } from "solid-js";
+
+import { cn } from "~/utils/cn";
 
 const dividerStyles = cva(["divider", "border-content-warm-secondary"], {
 	defaultVariants: {
@@ -17,12 +19,13 @@ const dividerStyles = cva(["divider", "border-content-warm-secondary"], {
 type DividerBaseProps = VariantProps<typeof dividerStyles>;
 interface DividerProps
 	extends JSX.HTMLAttributes<HTMLHRElement>,
-	DividerBaseProps { }
+		DividerBaseProps {}
 
 export function Divider(props: Readonly<DividerProps>): JSX.Element {
 	const [{ size }, rest] = splitProps(props, ["size"]);
 	return (
-		<hr class={cx(dividerStyles({ size }))} {...rest}>
+		// biome-ignore lint/correctness/noVoidElementsWithChildren: <explanation>
+		<hr class={cn(dividerStyles({ size }))} {...rest}>
 			{props.children}
 		</hr>
 	);

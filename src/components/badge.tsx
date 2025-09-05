@@ -1,9 +1,9 @@
-import { JSX, splitProps } from "solid-js";
+import type { JSX, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { cva, cx, type VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { defaultTo } from "~/utils/default-to";
 import type { PolymorphicComponent } from "~/utils/types";
+import { cn, defaultTo } from "~/utils";
 
 const badgeStyles = cva(
 	["badge", "text-xs font-medium px-2 py-0.5 rounded-sm overflow-hidden"],
@@ -31,7 +31,7 @@ const badgeStyles = cva(
 type BadgeBaseProps = VariantProps<typeof badgeStyles>;
 interface BadgeProps
 	extends PolymorphicComponent<HTMLDivElement>,
-	BadgeBaseProps { }
+		BadgeBaseProps {}
 
 export function Badge(props: Readonly<BadgeProps>): JSX.Element {
 	const [{ as, class: className, intent }, rest] = splitProps(props, [
@@ -42,7 +42,7 @@ export function Badge(props: Readonly<BadgeProps>): JSX.Element {
 	return (
 		<Dynamic
 			component={defaultTo("span", as)}
-			class={cx(badgeStyles({ intent }), className)}
+			class={cn(badgeStyles({ intent }), className)}
 			{...rest}
 		>
 			{props.children}

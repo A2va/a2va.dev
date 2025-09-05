@@ -1,7 +1,8 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, Show, splitProps } from "solid-js";
 
 import { Text } from "./typography/text";
+import { cn } from "~/utils/cn";
 
 const imageStyles = cva(["image", "border-content-warm-secondary"], {
 	variants: {
@@ -15,7 +16,7 @@ const imageStyles = cva(["image", "border-content-warm-secondary"], {
 type ImageBaseProps = VariantProps<typeof imageStyles>;
 export interface ImageProps
 	extends JSX.ImgHTMLAttributes<HTMLImageElement>,
-	ImageBaseProps {
+		ImageBaseProps {
 	alt: string;
 	caption?: string;
 	showCaption?: boolean;
@@ -36,9 +37,10 @@ export function Image(props: Readonly<ImageProps>): JSX.Element {
 		"center",
 	]);
 	const image = (
+		// biome-ignore lint/a11y/useAltText: <explanation>
 		<img
-			class={cx(imageStyles({ center }), className)}
-			alt={alt}
+			class={cn(imageStyles({ center }), className)}
+			alt={alt ?? ""}
 			decoding="async"
 			loading="lazy"
 			{...rest}
@@ -46,9 +48,10 @@ export function Image(props: Readonly<ImageProps>): JSX.Element {
 	);
 	return (
 		<Show when={showCaption} fallback={image}>
-			<figure class={cx(center ? "block" : "inline-block", containerClass)}>
+			<figure class={cn(center ? "block" : "inline-block", containerClass)}>
+				{/* biome-ignore lint/a11y/useAltText: alt is passed */}
 				<img
-					class={cx(imageStyles({ center }), className)}
+					class={cn(imageStyles({ center }), className)}
 					alt={alt}
 					decoding="async"
 					loading="lazy"

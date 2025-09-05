@@ -1,8 +1,8 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-import { defaultTo } from "~/utils/default-to";
+import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
 
 // TODO: Anchor could be rewrittent using the A component from solid-router
@@ -54,7 +54,7 @@ export function Anchor(props: Readonly<AnchorProps>): JSX.Element {
 	return (
 		<Dynamic
 			component={defaultTo("a", as)}
-			class={cx(
+			class={cn(
 				noStyle
 					? null
 					: anchorStyles({ variant, interactive: interactive ?? true }),

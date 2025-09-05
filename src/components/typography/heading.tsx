@@ -1,9 +1,9 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, Show, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { Anchor } from "~/components/anchor";
-import { defaultTo } from "~/utils/default-to";
+import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
 import { Typography } from ".";
 
@@ -60,7 +60,7 @@ export function Heading(props: Readonly<HeadingProps>): JSX.Element {
 		<Dynamic
 			// @ts-ignore
 			component={as ?? HEADING_SIZE_TAG[defaultTo("md", size)]}
-			class={cx(
+			class={cn(
 				styles,
 				{
 					inline: props.id,
@@ -81,7 +81,7 @@ export function Heading(props: Readonly<HeadingProps>): JSX.Element {
 					href={`#${props.id}`}
 					rel="bookmark"
 					aria-label={"Permalink to this heading"}
-					class={cx(styles, "ml-[0.5ch] inline text-text-secondary")}
+					class={cn(styles, "ml-[0.5ch] inline text-text-secondary")}
 					variant={"distinguished"}
 				>
 					<Typography.Text variant={"subdued"}>#</Typography.Text>

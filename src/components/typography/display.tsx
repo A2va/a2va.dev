@@ -1,4 +1,4 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, Show, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
@@ -6,7 +6,7 @@ import { Anchor } from "~/components/anchor";
 import type { PolymorphicComponent } from "~/utils/types";
 import { Typography } from ".";
 
-import { defaultTo } from "~/utils/default-to";
+import { cn, defaultTo } from "~/utils";
 
 type DisplayBaseProps = VariantProps<typeof displayStyles>;
 export const displayStyles = cva(
@@ -51,7 +51,7 @@ export function Display(props: Readonly<DisplayProps>): JSX.Element {
 	const display = (
 		<Dynamic
 			component={defaultTo("h1", as)}
-			class={cx(styles, { inline: props.id }, className)}
+			class={cn(styles, { inline: props.id }, className)}
 			{...rest}
 		>
 			{props.children}
@@ -67,7 +67,7 @@ export function Display(props: Readonly<DisplayProps>): JSX.Element {
 						href={`#${id()}`}
 						rel="bookmark"
 						aria-label={"Permalink to this heading"}
-						class={cx(
+						class={cn(
 							styles,
 							"ml-[0.5ch] inline text-text-secondary",
 							className,

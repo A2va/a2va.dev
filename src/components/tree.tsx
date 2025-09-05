@@ -1,8 +1,8 @@
 // Folder Tree from andi.dev
 // https://github.com/andi23rosca/andi.dev/blob/main/src/components/Tree.tsx
 
-import { type Component, For, Show } from "solid-js";
-import type { JSX } from "solid-js/h/jsx-runtime";
+import { For, Show } from "solid-js";
+import type { JSX } from "solid-js";
 
 type Node = { l: string; c: TreeNode[] };
 type TreeNode = string | Node;

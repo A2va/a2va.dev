@@ -1,4 +1,3 @@
-import { cx } from "class-variance-authority";
 import { type JSX, createSignal, onMount } from "solid-js";
 
 import { IconButton } from "~/components/button";

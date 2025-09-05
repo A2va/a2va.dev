@@ -1,5 +1,7 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, Show, splitProps } from "solid-js";
+
+import { cn } from "~/utils";
 
 export const buttonStyles = cva(
 	[
@@ -86,7 +88,7 @@ export function Button(props: Readonly<ButtonProps>): JSX.Element {
 
 	return (
 		<button
-			class={cx(buttonStyles({ variant, size, intent }), className)}
+			class={cn(buttonStyles({ variant, size, intent }), className)}
 			{...rest}
 		>
 			<Show when={props.leadingIcon}>
@@ -127,7 +129,7 @@ export function IconButton(props: Readonly<IconButtonProps>): JSX.Element {
 
 	return (
 		<button
-			class={cx(
+			class={cn(
 				buttonStyles({ variant, size, intent }),
 				iconButtonStyles({ size }),
 				className,

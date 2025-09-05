@@ -1,8 +1,8 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-import { defaultTo } from "~/utils/default-to";
+import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
 
 type TextBaseProps = VariantProps<typeof labelStyles>;
@@ -31,7 +31,7 @@ export function Text(props: Readonly<TextProps>): JSX.Element {
 	return (
 		<Dynamic
 			component={defaultTo("span", as)}
-			class={cx(labelStyles({ variant }), className)}
+			class={cn(labelStyles({ variant }), className)}
 			{...rest}
 		>
 			{props.children}

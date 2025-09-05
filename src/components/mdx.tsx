@@ -1,5 +1,3 @@
-import type { JSX } from "solid-js/jsx-runtime";
-
 import { Anchor, type AnchorProps } from "./anchor";
 import { Divider } from "./divider";
 import { Image, type ImageProps } from "./image";

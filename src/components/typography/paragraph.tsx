@@ -1,8 +1,8 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-import { defaultTo } from "~/utils/default-to";
+import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
 
 type ParagraphBaseProps = VariantProps<typeof paragraphStyles>;
@@ -39,7 +39,7 @@ export function Paragraph(props: Readonly<ParagraphProps>): JSX.Element {
 	return (
 		<Dynamic
 			component={defaultTo("p", as)}
-			class={cx(paragraphStyles({ variant, size }), className)}
+			class={cn(paragraphStyles({ variant, size }), className)}
 			{...rest}
 		>
 			{props.children}

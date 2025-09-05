@@ -1,4 +1,4 @@
-import { type VariantProps, cva, cx } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
 import { type JSX, Show, createSignal, splitProps } from "solid-js";
 
 // Updated tooltip styles with arrow variants
