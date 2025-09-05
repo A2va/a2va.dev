@@ -1,11 +1,13 @@
 import { useLocation } from "@solidjs/router";
+import { createSignal, onCleanup, onMount, Show } from "solid-js";
+import { isServer } from "solid-js/web";
+
 import { Anchor } from "~/components/anchor";
 import { ColorModeSwitcher } from "~/components/theme";
-
 import { Divider } from "~/components/divider";
 import { Typography } from "~/components/typography";
-
-import { A2va, At } from "~/components/icons";
+import { A2va, ArrowUp, At } from "~/components/icons";
+import { IconButton } from "./components";
 
 interface NavLinkProps {
 	href: string;
@@ -66,25 +68,62 @@ export function Header() {
 }
 
 export function Footer() {
+	const [showButton, setShowButton] = createSignal(false);
+
+	if (!isServer) {
+		const handleScroll = () => {
+			// Show button after scrolling down 400px
+			setShowButton(window.scrollY > 400);
+		};
+
+		onMount(() => {
+			window.addEventListener("scroll", handleScroll);
+		});
+
+		onCleanup(() => {
+			window.removeEventListener("scroll", handleScroll);
+		});
+	}
+
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	};
+
 	return (
-		<footer
-			id="footer"
-			class="container mx-auto p-5 pb-12 pt-0 transition-[max-width] duration-200 ease-in-out"
-		>
-			<Divider size="lg" />
-			<div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-				<div class="flex flex-col gap-2">
-					<A2va class="h-9 w-18 fill-primary" />
-					<Typography.Paragraph class="text-center" variant={"subdued"}>
-						at·ou·va
-					</Typography.Paragraph>
+		<>
+			<Show when={showButton()}>
+				<IconButton
+					class="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary-8 text-warm-1 shadow-md transition-transform duration-200 ease-in-out hover:scale-110 hover:bg-primary-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-7 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-1"
+					aria-label="ArrowUp"
+					onClick={scrollToTop}
+					icon={<ArrowUp />}
+				/>
+			</Show>
+			<footer
+				id="footer"
+				class="container mx-auto p-5 pb-12 pt-0 transition-[max-width] duration-200 ease-in-out"
+			>
+				<Divider size="lg" />
+				<div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+					<div class="flex flex-col gap-2">
+						<A2va class="h-9 w-18 fill-primary" />
+						<Typography.Paragraph class="text-center" variant={"subdued"}>
+							at·ou·va
+						</Typography.Paragraph>
+					</div>
+					<div class="flex justify-center gap-6 sm:items-center md:gap-10">
+						<Anchor
+							onClick={() => window.scrollTo(0, 0)}
+							variant="distinguished"
+						>
+							Back to top
+						</Anchor>
+					</div>
 				</div>
-				<div class="flex justify-center gap-6 sm:items-center md:gap-10">
-					<Anchor onClick={() => window.scrollTo(0, 0)} variant="distinguished">
-						Back to top
-					</Anchor>
-				</div>
-			</div>
-		</footer>
+			</footer>
+		</>
 	);
 }
