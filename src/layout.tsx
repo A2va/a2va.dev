@@ -141,29 +141,54 @@ export function Header() {
 export function Footer() {
 	return (
 		<>
-			<BackToTopButton class />
-			<footer
-				id="footer"
-				class="container mx-auto p-5 pb-12 pt-0 transition-[max-width] duration-200 ease-in-out"
-			>
-				<Divider size="lg" />
-				<div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-					<div class="flex flex-col items-center gap-2">
-						<A2va class="h-9 w-18 fill-primary" />
-						<Typography.Paragraph class="text-center" variant={"subdued"}>
-							at·ou·va
-						</Typography.Paragraph>
+			<BackToTopButton />
+			<div class="w-full shadow-[0_-1px_2px_0_rgb(0_0_0_/_0.05)]  transition-colors duration-150 ease-in-out">
+				<footer
+					id="footer"
+					class="container mx-auto p-5 pb-5 pt-5 transition-[max-width] duration-200 ease-in-out"
+				>
+					<div class="flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:items-center">
+						{/* Logo */}
+						<div class="flex flex-col items-center sm:items-start gap-2">
+							<A2va class="h-9 w-18 fill-primary" />
+							<Typography.Paragraph
+								class="text-center sm:text-left"
+								variant="subdued"
+							>
+								at·ou·va
+							</Typography.Paragraph>
+						</div>
+
+						{/* Links */}
+						<div class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 md:gap-10">
+							<Anchor
+								href="https://github.com/A2va"
+								external={true}
+								variant="subtle"
+							>
+								GitHub
+							</Anchor>
+							<Anchor
+								href="https://github.com/A2va/a2va.dev"
+								external={true}
+								variant="subtle"
+							>
+								Source code
+							</Anchor>
+						</div>
+
+						{/* Back to top (mobile only) */}
+						<div class="flex justify-center gap-6 sm:hidden sm:items-center sm:justify-end md:gap-10">
+							<Anchor
+								onClick={() => window.scrollTo(0, 0)}
+								variant="distinguished"
+							>
+								Back to top
+							</Anchor>
+						</div>
 					</div>
-					<div class="flex justify-center gap-6 sm:hidden sm:items-center md:gap-10">
-						<Anchor
-							onClick={() => window.scrollTo(0, 0)}
-							variant="distinguished"
-						>
-							Back to top
-						</Anchor>
-					</div>
-				</div>
-			</footer>
+				</footer>
+			</div>
 		</>
 	);
 }
