@@ -3,7 +3,6 @@ import { FileRoutes } from "@solidjs/start/router";
 import { Suspense, onMount } from "solid-js";
 
 import { Footer, Header } from "./layout";
-
 import "./app.css";
 
 export default function App() {
@@ -11,20 +10,39 @@ export default function App() {
 	onMount(() => {
 		const theme = {
 			initial: () => {
+				console.log(document.documentElement.getAttribute("color-scheme"));
 				const storedTheme = localStorage.getItem("theme");
 				if (storedTheme) return storedTheme;
-				if (matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
-				return "light";
+				return "system";
 			},
-			current: () => document.documentElement.getAttribute("color-scheme"),
-			set: (theme: string) => {
-				document.documentElement.setAttribute("color-scheme", theme);
-				localStorage.setItem("theme", theme);
-				return theme;
+			current: () => {
+				const theme = localStorage.getItem("theme");
+				if (theme) {
+					return theme;
+				}
+				return "system";
+			},
+			preferred: () =>
+				window.matchMedia("(prefers-color-scheme: dark)").matches
+					? "dark"
+					: "light",
+			set: (themeValue: string) => {
+				localStorage.setItem("theme", themeValue);
+				const scheme = themeValue === "system" ? theme.preferred() : themeValue;
+				document.documentElement.setAttribute("color-scheme", scheme);
 			},
 		};
 		(window as any).theme = theme;
 		theme.set(theme.initial());
+
+		// Listen for system theme changes
+		const media = window.matchMedia("(prefers-color-scheme: dark)");
+		const systemThemeListener = () => {
+			if (theme.current() === "system") {
+				theme.set("system");
+			}
+		};
+		media.addEventListener("change", systemThemeListener);
 	});
 
 	return (

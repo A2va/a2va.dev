@@ -23,12 +23,18 @@ export default createHandler(() => (
 					/>
 					{assets}
 
-					<script>
-						const theme = localStorage.getItem('theme') ||
-						(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark'
-						: 'light'); document.documentElement.setAttribute('color-scheme',
-						theme);
-					</script>
+					<script
+						innerHTML={`
+						const theme = localStorage.getItem('theme');
+						let scheme;
+						if (theme === "light" || theme === "dark") {
+							scheme = theme;
+						} else {
+							scheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+						}
+						document.documentElement.setAttribute("color-scheme", scheme);
+					`}
+					/>
 				</head>
 				<body>
 					<div id="app">{children}</div>
