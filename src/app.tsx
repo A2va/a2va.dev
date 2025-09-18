@@ -48,16 +48,16 @@ export default function App() {
 	return (
 		<Router
 			root={(props) => (
-				<>
+				<div class="flex flex-col min-h-screen">
 					<Header />
 					<main
 						id="main-content"
-						class="mx-auto flex flex-1 min-h-screen max-w-4xl flex-col container px-5 transition-[max-width] duration-200 ease-in-out"
+						class="mx-auto flex flex-1 max-w-4xl flex-col container px-5 transition-[max-width] duration-200 ease-in-out"
 					>
 						<Suspense>{props.children}</Suspense>
 					</main>
 					<Footer />
-				</>
+				</div>
 			)}
 		>
 			<FileRoutes />

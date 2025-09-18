@@ -1,13 +1,11 @@
 import { useLocation } from "@solidjs/router";
-import { createSignal, onCleanup, onMount, Show } from "solid-js";
+import { createSignal, onCleanup, onMount } from "solid-js";
 import { isServer } from "solid-js/web";
 
 import { Anchor } from "~/components/anchor";
 import { ColorModeSwitcher } from "~/components/theme";
-import { Divider } from "~/components/divider";
 import { Typography } from "~/components/typography";
 import { A2va, ArrowUp, At } from "~/components/icons";
-import { IconButton } from "./components";
 
 interface NavLinkProps {
 	href: string;
@@ -108,7 +106,7 @@ export function Header() {
 	return (
 		<div
 			class="sticky top-0 z-50 w-full
-			bg-warm-1 shadow-sm transition-colors duration-150 ease-in-out"
+			bg-warm-1 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-colors duration-150 ease-in-out"
 		>
 			<header
 				id="header"
@@ -142,17 +140,17 @@ export function Footer() {
 	return (
 		<>
 			<BackToTopButton />
-			<div class="w-full shadow-[0_-1px_2px_0_rgb(0_0_0_/_0.05)]  transition-colors duration-150 ease-in-out">
+			<div class="w-full mt-10 shadow-[0_-1px_2px_rgba(0,0,0,0.05)] transition-colors duration-150 ease-in-out">
 				<footer
 					id="footer"
-					class="container mx-auto p-5 pb-5 pt-5 transition-[max-width] duration-200 ease-in-out"
+					class="container p-5 mx-auto transition-[max-width] duration-200 ease-in-out"
 				>
 					<div class="flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:items-center">
 						{/* Logo */}
 						<div class="flex flex-col items-center sm:items-start gap-2">
 							<A2va class="h-9 w-18 fill-primary" />
 							<Typography.Paragraph
-								class="text-center sm:text-left"
+								class="text-center sm:text-left sm:pl-2"
 								variant="subdued"
 							>
 								at·ou·va
