@@ -7,8 +7,9 @@ author: A2va
 unpublished: true
 ---
 
-import { Tooltip, StarTooltip } from '~/components/tooltip';
-import { Tree } from '~/components/tree';
+import { Callout } from "~/components/callout";
+import { Tooltip, StarTooltip } from "~/components/tooltip";
+import { Tree } from "~/components/tree";
 
 # Header 1
 
@@ -23,38 +24,43 @@ import { Tree } from '~/components/tree';
 ###### Header 6
 
 Bold: **Hello**\
-Italic: *Hello*\
+Italic: _Hello_\
 Underline: <u>Hello</u>\
 Strikethrough: ~~Hello~~
 
 Bullet Points:
-* Hello
-* World
+
+- Hello
+- World
 
 Numbered List:
-1. Hello 
+
+1. Hello
 2. World
 
 Task List:
+
 - [ ] Unchecked
 - [x] Checked
 
-
 Code Block
+
 ```
 test
 This is a test
 ```
 
 Code Block with filename
+
 ```txt file="test.txt"
 test
 This is a test
-``` 
+```
 
 Inline code highlighting: `console.log("hello"){:js}`
 
 Code with filename and line numerotation
+
 ```c file="src/main.c" lines="true" start="10"
 int main() {
   printf("Hello, World!");
@@ -62,33 +68,53 @@ int main() {
 }
 ```
 
+<Callout variant="info" title="INFO">
+  This is a info callout.
+</Callout>
+
+<Callout variant="success" title="SUCCES">
+  This is a succes callout.
+</Callout>
+
+<Callout variant="warning" title="WARNING">
+  This is a warning callout.
+</Callout>
+
+<Callout variant="error" title="WARNING">
+  This is a error callout.
+</Callout>
+
 <Tooltip content="This is a tooltip">Hello world</Tooltip>
-<Tooltip content="This is a tooltip very long to show that it is expanding" position={'bottom'}>Hello world</Tooltip>
+<Tooltip
+  content="This is a tooltip very long to show that it is expanding"
+  position={"bottom"}
+>
+  Hello world
+</Tooltip>
 
 <StarTooltip content="This is a tooltip" />
 
-<Tree tree={{
-  l: "/andi.dev",
-  c: [
-    {
-    l: "src",
-    c: [{
-      l: "routes", 
-      c: [
-        {
-          l: "blog",
-          c: [
-            "post-1.mdx",
-            "post-2.mdx",
-            "post-3.mdx",
-          ]
-        }
-      ]},
-      "(home).tsx"
-    ]
-  }]
-}} />
+<Tree
+  tree={{
+    l: "/andi.dev",
+    c: [
+      {
+        l: "src",
+        c: [
+          {
+            l: "routes",
+            c: [
+              {
+                l: "blog",
+                c: ["post-1.mdx", "post-2.mdx", "post-3.mdx"],
+              },
+            ],
+          },
+          "(home).tsx",
+        ],
+      },
+    ],
+  }}
+/>
 
 Paragraph to see how to displays on multiline by trying to write a very long string hoping that it will be displayed on multiple lines.
-
-

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (@media (prefers-color-scheme: dark));
+@custom-variant dark (&:where([color-scheme=dark], [color-scheme=dark] *));
 
 @theme {
 	--color-warm-1: var(--warm-1);
@@ -350,7 +350,7 @@
 }
 
 html {
-  @apply bg-warm-1;
+	@apply bg-warm-1;
 }
 
 body {
