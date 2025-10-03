@@ -40,7 +40,7 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 				</Show>
 				<Typography.Paragraph variant={"subdued"} class="mt-3">
 					<time dateTime={post.date.toISOString()}>
-						{post.date.toLocaleDateString("en-EN", {
+						{post.date.toLocaleDateString("en-GB", {
 							year: "numeric",
 							month: "long",
 							day: "numeric",
