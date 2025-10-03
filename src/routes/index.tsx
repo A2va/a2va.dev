@@ -32,7 +32,7 @@ export default function Home() {
 				aria-labelledby="intro"
 				aria-describedby="intro-description"
 			>
-				<Typography.Display id="intro" size="sm">
+				<Typography.Display id="intro" size="md">
 					About Me 👋🏻
 				</Typography.Display>
 				<Typography.Paragraph

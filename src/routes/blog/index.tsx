@@ -49,7 +49,7 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 				</Typography.Paragraph>
 				<div class="mt-1">
 					<Typography.Heading
-						size={"sm"}
+						size={"md"}
 						id={`${hyphenatedSlug}-title`}
 						hideAnchor
 					>
