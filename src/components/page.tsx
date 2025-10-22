@@ -5,17 +5,16 @@ import { type JSX, createMemo, splitProps } from "solid-js";
 interface PageProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	title: string;
 	description: string;
+	image?: string;
 	keywords?: string;
 	reverse?: boolean;
 }
 
 export function Page(props: Readonly<PageProps>): JSX.Element {
-	const [{ title, description, keywords, reverse }, rest] = splitProps(props, [
-		"title",
-		"description",
-		"keywords",
-		"reverse",
-	]);
+	const [{ title, description, image, keywords, reverse }, rest] = splitProps(
+		props,
+		["title", "description", "image", "keywords", "reverse"],
+	);
 	const location = useLocation();
 
 	const formattedTitle = createMemo(() => {
@@ -30,8 +29,12 @@ export function Page(props: Readonly<PageProps>): JSX.Element {
 				<Meta name="title" content={formattedTitle()} />
 				<Meta name="description" content={description} />
 				{keywords ? <Meta name="keywords" content={keywords} /> : null}
+				<Meta name="og:locale" content="en" />
 				<Meta name="og:title" content={formattedTitle()} />
 				<Meta name="og:description" content={description} />
+				{image ? (
+					<Meta name="og:image" content={__APP_WEBSITE + image} />
+				) : null}
 				<Meta name="og:type" content="website" />
 				<Meta name="og:url" content={__APP_WEBSITE + location.pathname} />
 				<Link rel="canonical" href={__APP_WEBSITE + location.pathname} />
