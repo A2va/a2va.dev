@@ -1,23 +1,32 @@
 [
-  {
-    "title": "When Cargo Meets XMake: A Better Way to Build Together",
-    "description": "Easily integrate C/C++ code into your Rust projects using XMake. In this post, I dive into how xmake-rs automates linking, handles dependencies, without the usual manual setup.",
-    "tags": ["rust", "xmake", "c++", "c", "build system"],
-    "date": "2025-04-11",
-    "image": {
-      "src": "/projects/xmake-rs.svg",
-      "alt": ""
-    },
-    "author": "A2va",
-    "slug": "xmakers-v03"
-  },
-  {
-    "title": "Test MDX",
-    "description": "Test MDX.",
-    "tags": ["markdown", "mdx", "test"],
-    "date": "2025-01-15",
-    "author": "A2va",
-    "unpublished": true,
-    "slug": "test-mdx"
-  }
+	{
+		"title": "When Cargo Meets XMake: A Better Way to Build Together",
+		"description": "Easily integrate C/C++ code into your Rust projects using XMake. In this post, I dive into how xmake-rs automates linking, handles dependencies, without the usual manual setup.",
+		"tags": ["rust", "xmake", "c++", "c", "build system"],
+		"date": "2025-04-11",
+		"image": {
+			"src": "/projects/xmake-rs.svg",
+			"alt": ""
+		},
+		"author": "A2va",
+		"slug": "xmakers-v03"
+	},
+	{
+		"title": "Test MDX",
+		"description": "Test MDX.",
+		"tags": ["markdown", "mdx", "test"],
+		"date": "2025-01-15",
+		"author": "A2va",
+		"unpublished": true,
+		"slug": "test-mdx"
+	},
+	{
+		"title": "Test Typst",
+		"description": "Test MDX.",
+		"tags": ["typst", "test"],
+		"date": "2025-01-15",
+		"author": "A2va",
+		"unpublished": false,
+		"slug": "test-typ"
+	}
 ]

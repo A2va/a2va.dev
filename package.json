@@ -20,6 +20,7 @@
 		"vinxi": "^0.5.3"
 	},
 	"devDependencies": {
+		"@myriaddreamin/typst-ts-node-compiler": "^0.6.0",
 		"@biomejs/biome": "^1.9.4",
 		"@shikijs/rehype": "^2.3.2",
 		"@shikijs/transformers": "^2.3.2",
