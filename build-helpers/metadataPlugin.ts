@@ -13,6 +13,26 @@ function normalizePath(p: string): string {
 	return path.normalize(p).replace(/\\/g, "/");
 }
 
+function walkFiles(dir: string): string[] {
+	if (!fs.existsSync(dir)) {
+		return [];
+	}
+
+	return fs.readdirSync(dir).flatMap((file) => {
+		const fullPath = path.join(dir, file);
+		const stat = fs.statSync(fullPath);
+		if (stat.isDirectory()) {
+			return walkFiles(fullPath);
+		}
+		return [fullPath];
+	});
+}
+
+function getBlogSourceFiles(rootPath: string): string[] {
+	const postsDir = path.join(rootPath, "src/routes/blog/(post)");
+	return walkFiles(postsDir).filter((file) => /[.](md|mdx|typ)$/.test(file));
+}
+
 function sitemapGen(routes: Route[], baseUrl: string, rootPath: string) {
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -32,20 +52,18 @@ function sitemapGen(routes: Route[], baseUrl: string, rootPath: string) {
 	fs.writeFileSync(path.join(rootPath, "public", "sitemap.xml"), sitemap);
 }
 
-function blogPostGen(routes: Route[], nodeEnv: string): Set<string> {
-	const blogRoutes = routes.filter((route) => route.path.startsWith("/blog/"));
-
+function blogPostGen(rootPath: string, nodeEnv: string): Set<string> {
 	// biome-ignore lint: This variable is mutated in filter callback
 	let ignoredPosts = new Set<string>();
 
 	// TODO: Type enforcement can be improved
 	// cf https://gitlab.truevoid.dev/truevoid/main-site/-/merge_requests/17/diffs#67d9d2b82e9b7e7971f4d4bcfaffff37b36a3485
-	const blogPosts = blogRoutes
-		.map((route) => {
-			const f = readSync(path.resolve("src/routes/blog/(post)", route.file));
+	const blogPosts = getBlogSourceFiles(rootPath)
+		.map((file) => {
+			const f = readSync(file);
 			matter(f);
 			const parsedPath = path.parse(
-				path.relative("src/routes/blog/(post)", route.file),
+				path.relative(path.join(rootPath, "src/routes/blog/(post)"), file),
 			);
 			return {
 				...(f.data.matter as object),
@@ -74,11 +92,13 @@ function blogPostGen(routes: Route[], nodeEnv: string): Set<string> {
 function metadataGen(rootPath: string, nodeEnv: string, baseUrl: string) {
 	const routes = getRoutes(path.join(rootPath, "src/routes"));
 
-	const ignoredRoutes = blogPostGen(routes, nodeEnv);
+	const ignoredRoutes = blogPostGen(rootPath, nodeEnv);
 	ignoredRoutes.add("/[...404]");
 
 	sitemapGen(
-		routes.filter((route) => !ignoredRoutes.has(route.path)),
+		routes.filter(
+			(route) => !ignoredRoutes.has(route.path) && !/[\[\]*:]/.test(route.path),
+		),
 		baseUrl,
 		rootPath,
 	);
@@ -92,6 +112,7 @@ export function metadataPlugin(): Plugin {
 		configResolved(config: ResolvedConfig) {
 			baseUrl = JSON.parse(config?.define?.__APP_WEBSITE) ?? "https://a2va.dev";
 			nodeEnv = JSON.parse(config?.define?.__APP_NODE_ENV) ?? "production";
+			metadataGen(config.root, nodeEnv, baseUrl);
 		},
 		buildStart() {
 			const rootPath = process.cwd();
@@ -99,12 +120,16 @@ export function metadataPlugin(): Plugin {
 		},
 		configureServer(server) {
 			const rootPath = server.config.root;
-			server.watcher.on("change", (filePath) => {
+			const onRouteFile = (filePath: string) => {
 				const p = path.relative(rootPath, filePath);
 				if (path.matchesGlob(p, "src/routes/**")) {
 					metadataGen(rootPath, nodeEnv, baseUrl);
 				}
-			});
+			};
+
+			server.watcher.on("change", onRouteFile);
+			server.watcher.on("add", onRouteFile);
+			server.watcher.on("unlink", onRouteFile);
 		},
 	};
 }

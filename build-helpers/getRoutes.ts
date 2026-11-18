@@ -27,7 +27,7 @@ export function getRoutes(dir: string, basePath = ""): Route[] {
 				const nestedPath = `${basePath}/${file}`;
 				routes.push(...getRoutes(fullPath, nestedPath));
 			}
-		} else if (/[.](tsx|ts|md|mdx)$/.test(file)) {
+		} else if (/[.](tsx|ts|md|mdx|typ)$/.test(file)) {
 			let routePath = basePath;
 			const fileName = path.parse(file).name;
 

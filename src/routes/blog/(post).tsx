@@ -39,8 +39,10 @@ const getPostMeta = query(async (slug: string) => {
 export default function BlogEntry(props: Readonly<RouteSectionProps>) {
   const location = useLocation();
   const articleId = () => {
-    const routeSegments = location.pathname.split("/");
-    return routeSegments[routeSegments.length - 1];
+    const slug = location.pathname
+      .replace(/^\/blog\/?/, "")
+      .replace(/\/+$/, "");
+    return decodeURIComponent(slug);
   };
 
   const meta = createAsync(() => getPostMeta(articleId()), {

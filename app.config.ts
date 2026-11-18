@@ -12,6 +12,7 @@ import rehypeMdxCodeProps from "rehype-mdx-code-props";
 import rehypeSlug from "rehype-slug";
 
 import { metadataPlugin } from "./build-helpers/metadataPlugin";
+import { typstPlugin } from "./build-helpers/typstPlugin";
 
 // @ts-ignore
 import pkg from "@vinxi/plugin-mdx";
@@ -37,6 +38,7 @@ export default defineConfig({
 	},
 	vite: {
 		plugins: [
+			typstPlugin(),
 			metadataPlugin(),
 			mdx.withImports({})({
 				remarkPlugins: [remarkFrontmatter, remarkGfm],

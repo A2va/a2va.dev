@@ -8,6 +8,30 @@ bun install
 bun dev
 ```
 
+## Blog posts
+
+Posts live in `src/routes/blog/(post)` and can be written in MDX (`.mdx`) or
+Typst (`.typ`). Typst posts start with the same YAML frontmatter as MDX posts,
+followed by regular Typst source:
+
+```typst
+---
+title: My Typst post
+description: A short description
+tags: [typst]
+date: 2026-01-01
+author: A2va
+---
+
+= Introduction
+
+The Typst document is compiled to HTML at build time.
+```
+
+The frontmatter is used for the blog index, the post metadata and the sitemap.
+Typst files are watched in development, so adding or editing a post reloads the
+page.
+
 For deployment, you can use the following command
 ```
 docker build -t a2va/a2va.dev .

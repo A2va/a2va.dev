@@ -512,3 +512,119 @@ body {
 		background: var(--primary-8);
 	}
 }
+
+/*
+  Typst's HTML export only emits semantic elements, without classes. These
+  rules mirror the MDX typography components so both post formats look alike.
+*/
+.typst-content {
+	@apply text-base leading-normal;
+
+	> :first-child,
+	> div > :first-child {
+		@apply mt-0;
+	}
+
+	h1 {
+		@apply mt-12 mb-6 text-3xl font-semibold leading-tight sm:text-4xl;
+	}
+
+	h2 {
+		@apply mt-12 mb-5 text-2xl font-semibold leading-tight sm:text-3xl;
+	}
+
+	h3 {
+		@apply mt-10 mb-4 text-xl font-semibold leading-snug sm:text-2xl;
+	}
+
+	h4 {
+		@apply mt-8 mb-3 text-lg font-semibold leading-snug sm:text-xl;
+	}
+
+	h5 {
+		@apply mt-6 mb-3 text-base font-semibold leading-snug sm:text-lg;
+	}
+
+	h6 {
+		@apply mt-5 mb-2 text-base font-semibold leading-normal;
+	}
+
+	p {
+		@apply mb-5;
+	}
+
+	a {
+		@apply font-medium text-primary no-underline transition-colors duration-200 ease-in-out hover:underline;
+	}
+
+	strong {
+		@apply font-semibold;
+	}
+
+	em {
+		@apply italic;
+	}
+
+	ul {
+		@apply mb-6 list-disc list-outside space-y-3 pl-7;
+	}
+
+	ol {
+		@apply mb-6 list-decimal list-outside space-y-3 pl-7;
+	}
+
+	li > p {
+		@apply mb-0;
+	}
+
+	li > ul,
+	li > ol {
+		@apply mt-3 mb-0;
+	}
+
+	blockquote {
+		@apply my-6 border-l-4 border-warm-4 pl-4 text-text-secondary italic;
+	}
+
+	code {
+		@apply rounded bg-warm-2 px-1.5 py-0.5 font-mono text-sm;
+	}
+
+	pre {
+		@apply my-8 overflow-x-auto rounded-md bg-warm-2 p-4 font-mono text-sm leading-normal;
+	}
+
+	pre code {
+		@apply bg-transparent p-0;
+	}
+
+	hr {
+		@apply my-8 border-content-warm-secondary;
+	}
+
+	table {
+		@apply my-5 w-full border-collapse overflow-hidden rounded-xl border border-warm-7;
+	}
+
+	th,
+	td {
+		@apply border border-warm-4 px-3 py-2 text-left align-top;
+	}
+
+	thead th {
+		@apply bg-warm-2 font-semibold;
+	}
+
+	figure {
+		@apply my-8;
+	}
+
+	figcaption {
+		@apply mt-2 text-sm text-text-secondary;
+	}
+
+	img,
+	svg {
+		@apply max-w-full rounded-xl;
+	}
+}
