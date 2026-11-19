@@ -1,4 +1,5 @@
-import { createMemo, For, type JSX, Show, splitProps } from "solid-js";
+import { createMemo, For, omit, Show } from "solid-js";
+import type { JSX } from "@solidjs/web";
 import { Anchor, Image, Page, Typography } from "~/components";
 
 import { posts } from "~/data/posts";
@@ -15,32 +16,36 @@ const FLAGS = {
 };
 
 function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
-	const [{ post }, rest] = splitProps(props, ["post"]);
-	const hyphenatedSlug = hyphenate(post.slug);
+	const rest = omit(props, "post");
+	const hyphenatedSlug = () => hyphenate(props.post.slug);
 
 	return (
 		<article
-			id={hyphenatedSlug}
-			aria-labelledby={`${hyphenatedSlug}-title`}
+			id={hyphenatedSlug()}
+			aria-labelledby={`${hyphenatedSlug()}-title`}
 			{...rest}
 		>
-			<Anchor variant={"subtle"} href={`/blog/${post.slug}`} class="block">
+			<Anchor
+				variant={"subtle"}
+				href={`/blog/${props.post.slug}`}
+				class="block"
+			>
 				<Show
-					when={post.image}
+					when={props.post.image}
 					fallback={
 						<div class="aspect-5/6 h-full w-full rounded-xl bg-warm-2 object-cover" />
 					}
 				>
 					<Image
-						title={post.title}
-						src={post.image?.src}
-						alt={post.image?.alt ?? ""}
+						title={props.post.title}
+						src={props.post.image?.src}
+						alt={props.post.image?.alt ?? ""}
 						class="aspect-5/6 w-full h-full rounded-xl object-contain object-center"
 					/>
 				</Show>
 				<Typography.Paragraph variant={"subdued"} class="mt-3">
-					<time dateTime={post.date.toISOString()}>
-						{post.date.toLocaleDateString("en-GB", {
+					<time datetime={props.post.date.toISOString()}>
+						{props.post.date.toLocaleDateString("en-GB", {
 							year: "numeric",
 							month: "long",
 							day: "numeric",
@@ -50,24 +55,24 @@ function BlogCard(props: Readonly<BlogCardProps>): JSX.Element {
 				<div class="mt-1">
 					<Typography.Heading
 						size={"md"}
-						id={`${hyphenatedSlug}-title`}
+						id={`${hyphenatedSlug()}-title`}
 						hideAnchor
 					>
-						{post.title}
+						{props.post.title}
 					</Typography.Heading>
 					{FLAGS.showDescription && (
 						<Typography.Paragraph
 							variant={"subdued"}
 							size={"sm"}
 							class="mt-2 truncate"
-							title={post.description}
+							title={props.post.description}
 						>
-							{post.description}
+							{props.post.description}
 						</Typography.Paragraph>
 					)}
 					{FLAGS.showTags && (
 						<ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 opacity-60">
-							<For each={post.tags}>
+							<For each={props.post.tags}>
 								{(tag) => <li class="text-sm font-light">#{tag}</li>}
 							</For>
 						</ul>

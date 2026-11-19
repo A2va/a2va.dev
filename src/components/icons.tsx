@@ -1,4 +1,4 @@
-import type { JSX, JSXElement } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 /**
  *  The following icons are from the Lucide icon set.
@@ -8,7 +8,7 @@ import type { JSX, JSXElement } from "solid-js";
 
 export function ArrowUp(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ export function ArrowUp(
 
 export function Github(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ export function Github(
 
 export function LinkedIn(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ export function LinkedIn(
 
 export function Copy(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ export function Copy(
 
 export function Sun(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +135,7 @@ export function Sun(
 
 export function Moon(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +156,9 @@ export function Moon(
 	);
 }
 
-export function SunMoon(props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>) {
+export function SunMoon(
+	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -169,6 +171,7 @@ export function SunMoon(props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>) {
 			stroke-linecap="round"
 			stroke-linejoin="round"
 			class="lucide lucide-sun-moon-icon lucide-sun-moon"
+			{...props}
 		>
 			<title>SunMoon</title>
 			<path d="M12 2v2" />
@@ -185,7 +188,7 @@ export function SunMoon(props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>) {
 // https://github.com/bluesky-social/social-app/blob/main/LICENSE
 export function At(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -211,7 +214,7 @@ export function At(
 
 export function A2va(
 	props: Readonly<JSX.HTMLAttributes<SVGSVGElement>>,
-): JSXElement {
+): JSX.Element {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

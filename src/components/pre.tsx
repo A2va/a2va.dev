@@ -1,5 +1,5 @@
-import { type JSX, Show, createSignal, onMount } from "solid-js";
-import { isServer } from "solid-js/web";
+import { Show, createSignal, onSettled } from "solid-js";
+import { isServer, type JSX } from "@solidjs/web";
 import { IconButton } from "./button";
 import { Copy } from "./icons";
 
@@ -37,7 +37,7 @@ export function Pre(props: PreProps) {
 	const [copied, setCopied] = createSignal(false);
 	const [isScrolling, setIsScrolling] = createSignal(false);
 	let ref!: HTMLPreElement;
-	let scrollTimeout: NodeJS.Timeout;
+	let scrollTimeout: ReturnType<typeof setTimeout>;
 
 	const onCopy = () => {
 		setCopied(true);
@@ -45,20 +45,26 @@ export function Pre(props: PreProps) {
 		setTimeout(() => setCopied(false), 1500);
 	};
 
-	onMount(() => {
-		ref.addEventListener("scroll", () => {
+	onSettled(() => {
+		const onScroll = () => {
 			setIsScrolling(true);
 			clearTimeout(scrollTimeout);
 			scrollTimeout = setTimeout(() => setIsScrolling(false), 150);
-		});
+		};
 
-		ref.addEventListener("wheel", (e) => {
+		const onWheel = (e: WheelEvent) => {
 			if (e.shiftKey) {
-				setIsScrolling(true);
-				clearTimeout(scrollTimeout);
-				scrollTimeout = setTimeout(() => setIsScrolling(false), 150);
+				onScroll();
 			}
-		});
+		};
+
+		ref.addEventListener("scroll", onScroll);
+		ref.addEventListener("wheel", onWheel);
+
+		return () => {
+			ref.removeEventListener("scroll", onScroll);
+			ref.removeEventListener("wheel", onWheel);
+		};
 	});
 
 	const isSelected = () => {

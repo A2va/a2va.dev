@@ -1,18 +1,25 @@
-import type { JSX, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
+import { omit } from "solid-js";
+import { type JSX, type ValidComponent, dynamic } from "@solidjs/web";
 
-import type { PolymorphicComponent } from "~/utils/types";
 import { cn, defaultTo } from "~/utils";
+import type { PolymorphicComponent } from "~/utils/types";
 
 const badgeStyles = cva(
-	["badge", "text-xs font-medium px-2 py-0.5 rounded-sm overflow-hidden"],
+	[
+		"badge",
+		"inline-flex",
+		"items-center",
+		"justify-center",
+		"font-medium",
+		"whitespace-nowrap",
+	],
 	{
 		variants: {
 			intent: {
-				success: "bg-primary-9 text-primary-3",
-				neutral: "bg-warm-12 text-warm-3",
-				warning: "bg-warning-10 text-black",
+				neutral: "bg-warm-4 text-warm-11",
+				success: "bg-success-4 text-success-11",
+				warning: "bg-warning-4 text-warning-11",
 				danger: "bg-danger-11 text-danger-2",
 			},
 			size: {
@@ -34,18 +41,16 @@ interface BadgeProps
 		BadgeBaseProps {}
 
 export function Badge(props: Readonly<BadgeProps>): JSX.Element {
-	const [{ as, class: className, intent }, rest] = splitProps(props, [
-		"as",
-		"class",
-		"intent",
-	]);
+	const rest = omit(props, "as", "class", "intent");
+	const Component = dynamic(
+		() => defaultTo("span", props.as) as ValidComponent,
+	);
 	return (
-		<Dynamic
-			component={defaultTo("span", as)}
-			class={cn(badgeStyles({ intent }), className)}
+		<Component
+			class={cn(badgeStyles({ intent: props.intent }), props.class)}
 			{...rest}
 		>
 			{props.children}
-		</Dynamic>
+		</Component>
 	);
 }

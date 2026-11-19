@@ -1,23 +1,31 @@
-import { Router } from "@solidjs/router";
-import { FileRoutes } from "@solidjs/start/router";
-import { Suspense, onMount } from "solid-js";
+import { Loading, onSettled, type ParentProps } from "solid-js";
+import { isServer } from "@solidjs/web";
 
 import { Footer, Header } from "./layout";
+import { Router } from "./router";
+import type { Theme } from "./utils/types";
 import "./app.css";
 
 export default function App() {
-	// Theme gloal state
-	onMount(() => {
+	// Theme global state. Registered on both sides so the hydration id
+	// namespace stays aligned; the server has no browser work to do.
+	onSettled(() => {
+		if (isServer) return;
 		const theme = {
-			initial: () => {
-				console.log(document.documentElement.getAttribute("color-scheme"));
+			initial: (): Theme => {
 				const storedTheme = localStorage.getItem("theme");
-				if (storedTheme) return storedTheme;
+				if (
+					storedTheme === "light" ||
+					storedTheme === "dark" ||
+					storedTheme === "system"
+				) {
+					return storedTheme;
+				}
 				return "system";
 			},
-			current: () => {
+			current: (): Theme => {
 				const theme = localStorage.getItem("theme");
-				if (theme) {
+				if (theme === "light" || theme === "dark" || theme === "system") {
 					return theme;
 				}
 				return "system";
@@ -26,13 +34,13 @@ export default function App() {
 				window.matchMedia("(prefers-color-scheme: dark)").matches
 					? "dark"
 					: "light",
-			set: (themeValue: string) => {
+			set: (themeValue: Theme) => {
 				localStorage.setItem("theme", themeValue);
 				const scheme = themeValue === "system" ? theme.preferred() : themeValue;
 				document.documentElement.setAttribute("color-scheme", scheme);
 			},
 		};
-		(window as any).theme = theme;
+		window.theme = theme;
 		theme.set(theme.initial());
 
 		// Listen for system theme changes
@@ -43,24 +51,24 @@ export default function App() {
 			}
 		};
 		media.addEventListener("change", systemThemeListener);
+
+		return () => media.removeEventListener("change", systemThemeListener);
 	});
 
 	return (
-		<Router
-			root={(props) => (
+		<Router>
+			{(props: ParentProps) => (
 				<div class="flex flex-col min-h-screen">
 					<Header />
 					<main
 						id="main-content"
 						class="mx-auto flex flex-1 max-w-4xl flex-col container px-5 transition-[max-width] duration-200 ease-in-out"
 					>
-						<Suspense>{props.children}</Suspense>
+						<Loading>{props.children}</Loading>
 					</main>
 					<Footer />
 				</div>
 			)}
-		>
-			<FileRoutes />
 		</Router>
 	);
 }

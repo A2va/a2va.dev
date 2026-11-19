@@ -1,39 +1,46 @@
 {
-	"name": "example-with-tailwindcss",
-	"type": "module",
-	"scripts": {
-		"dev": "NODE_ENV=development vinxi dev",
-		"build": "bun install && NODE_ENV=production vinxi build",
-		"start": "vinxi start",
-		"format": "biome format --write ."
-	},
-	"dependencies": {
-		"@mdx-js/mdx": "^3.1.0",
-		"@solidjs/meta": "^0.29.4",
-		"@solidjs/router": "^0.15.0",
-		"@solidjs/start": "^1.1.0",
-		"@vinxi/plugin-mdx": "^3.7.2",
-		"class-variance-authority": "^0.7.1",
-		"solid-js": "^1.9.2",
-		"solid-mdx": "^0.0.7",
-		"tailwind-merge": "^3.3.1",
-		"vinxi": "^0.5.3"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
-		"@shikijs/rehype": "^2.3.2",
-		"@shikijs/transformers": "^2.3.2",
-		"@tailwindcss/postcss": "^4.1.3",
-		"postcss": "^8.4.38",
-		"rehype-mdx-code-props": "^3.0.1",
-		"rehype-slug": "^6.0.0",
-		"remark-frontmatter": "^5.0.0",
-		"remark-gfm": "^4.0.1",
-		"tailwindcss": "^4.1.3",
-		"to-vfile": "^8.0.0",
-		"vfile-matter": "^5.0.0"
-	},
-	"engines": {
-		"node": ">=22"
-	}
+  "name": "a2va.dev",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": " vite build",
+    "build:cloudflare": "bun install && SERVER_PRESET=cloudflare_pages vite build",
+    "start": "node dist/server/node.js",
+    "serve": "vite preview",
+    "format": "biome format --write .",
+    "preview:cloudflare": "wrangler pages dev dist"
+  },
+  "dependencies": {
+    "@solidjs/meta": "^2.0.0",
+    "@solidjs/router": "^2.0.0",
+    "@solidjs/web": "^2.0.1",
+    "class-variance-authority": "^0.7.1",
+    "solid-js": "^2.0.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@biomejs/biome": "^1.9.4",
+    "@mdx-js/rollup": "^3.1.1",
+    "@shikijs/rehype": "^2.3.2",
+    "@shikijs/transformers": "^2.3.2",
+    "@solidjs/vite-plugin": "^3.0.1",
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/node": "^24.9.2",
+    "filesystem-routing": "^0.5.0",
+    "nitro": "^3.0.261103-rc",
+    "rehype-mdx-code-props": "^3.0.1",
+    "rehype-slug": "^6.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^4.1.3",
+    "to-vfile": "^8.0.0",
+    "typescript": "^5.9.3",
+    "vfile-matter": "^5.0.0",
+    "vite": "^8.3.8",
+    "wrangler": "^4.165.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
 }

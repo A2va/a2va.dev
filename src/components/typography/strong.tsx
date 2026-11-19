@@ -1,5 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
+import { omit } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 import { cn } from "~/utils/cn";
 
@@ -11,9 +12,9 @@ export interface StrongProps
 		StrongBaseProps {}
 
 export function Strong(props: Readonly<StrongProps>): JSX.Element {
-	const [{ class: className }, rest] = splitProps(props, ["class"]);
+	const rest = omit(props, "class");
 	return (
-		<strong class={cn(strongStyles(), className)} {...rest}>
+		<strong class={cn(strongStyles(), props.class)} {...rest}>
 			{props.children}
 		</strong>
 	);

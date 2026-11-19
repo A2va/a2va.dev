@@ -7,7 +7,7 @@ import { readSync } from "to-vfile";
 import { matter } from "vfile-matter";
 
 import type { Plugin, ResolvedConfig } from "vite";
-import { type Route, getRoutes } from "./getRoutes";
+import { type Route, getRoutes } from "./getRoutes.ts";
 
 function normalizePath(p: string): string {
 	return path.normalize(p).replace(/\\/g, "/");

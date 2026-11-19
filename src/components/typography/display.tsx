@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, Show, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
+import { Show, omit } from "solid-js";
+import { type JSX, type ValidComponent, dynamic } from "@solidjs/web";
 
 import { Anchor } from "~/components/anchor";
 import type { PolymorphicComponent } from "~/utils/types";
@@ -40,22 +40,18 @@ export interface DisplayProps
  * @see https://fae.disability.illinois.edu/rulesets/HEADING_2/
  */
 export function Display(props: Readonly<DisplayProps>): JSX.Element {
-	const [{ variant, size, as, class: className }, rest] = splitProps(props, [
-		"size",
-		"variant",
-		"as",
-		"class",
-	]);
+	const rest = omit(props, "size", "variant", "as", "class");
 
-	const styles = displayStyles({ variant, size });
+	const Component = dynamic(() => defaultTo("h1", props.as) as ValidComponent);
+	const styles = () =>
+		displayStyles({ variant: props.variant, size: props.size });
 	const display = (
-		<Dynamic
-			component={defaultTo("h1", as)}
-			class={cn(styles, { inline: props.id }, className)}
+		<Component
+			class={cn(styles(), { inline: props.id }, props.class)}
 			{...rest}
 		>
 			{props.children}
-		</Dynamic>
+		</Component>
 	);
 
 	return (
@@ -68,9 +64,9 @@ export function Display(props: Readonly<DisplayProps>): JSX.Element {
 						rel="bookmark"
 						aria-label={"Permalink to this heading"}
 						class={cn(
-							styles,
+							styles(),
 							"ml-[0.5ch] inline text-text-secondary",
-							className,
+							props.class,
 						)}
 						variant={"distinguished"}
 					>

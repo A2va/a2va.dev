@@ -6,15 +6,19 @@
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
+		"jsxImportSource": "@solidjs/web",
 		"allowJs": true,
 		"noEmit": true,
+		"allowImportingTsExtensions": true,
 		"strict": true,
-		"types": ["vinxi/types/client"],
+		"skipLibCheck": true,
+		"types": ["vite/client", "node"],
 		"isolatedModules": true,
 		"forceConsistentCasingInFileNames": true,
 		"paths": {
 			"~/*": ["./src/*"]
-		}
-	}
+		},
+		"baseUrl": "."
+	},
+	"include": ["src", "build-helpers", "vite.config.ts", "file-routes.d.ts"]
 }

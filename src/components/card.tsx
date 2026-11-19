@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
+import { omit } from "solid-js";
+import { type JSX, type ValidComponent, dynamic } from "@solidjs/web";
 
 import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
@@ -16,14 +16,13 @@ interface CardProps
 		CardBaseProps {}
 
 export function Card(props: Readonly<CardProps>): JSX.Element {
-	const [{ as, class: className }, rest] = splitProps(props, ["as", "class"]);
+	const rest = omit(props, "as", "class");
+	const Component = dynamic(
+		() => defaultTo("article", props.as) as ValidComponent,
+	);
 	return (
-		<Dynamic
-			component={defaultTo("article", as)}
-			class={cn(cardStyles(), className)}
-			{...rest}
-		>
+		<Component class={cn(cardStyles(), props.class)} {...rest}>
 			{props.children}
-		</Dynamic>
+		</Component>
 	);
 }

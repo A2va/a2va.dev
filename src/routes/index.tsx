@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 import { Anchor, Page, Typography } from "~/components";
 import { ProjectCard } from "~/components/project-card";
-import { type Project } from "~/utils/types";
+import type { Project } from "~/utils/types";
 
 const PROJECTS: Project[] = [
 	{

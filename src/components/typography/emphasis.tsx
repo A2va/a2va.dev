@@ -1,5 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
+import { omit } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 import { cn } from "~/utils/cn";
 
@@ -11,9 +12,9 @@ export interface EmphasisProps
 		EmphasisBaseProps {}
 
 export function Emphasis(props: Readonly<EmphasisProps>): JSX.Element {
-	const [{ class: className }, rest] = splitProps(props, ["class"]);
+	const rest = omit(props, "class");
 	return (
-		<em class={cn(emphasisStyles(), className)} {...rest}>
+		<em class={cn(emphasisStyles(), props.class)} {...rest}>
 			{props.children}
 		</em>
 	);

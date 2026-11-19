@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
+import { createMemo, omit } from "solid-js";
+import { type JSX, type ValidComponent, dynamic } from "@solidjs/web";
 
 import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
@@ -26,26 +26,25 @@ export interface ListProps
 export function List(
 	props: Readonly<ListProps & { className?: string }>,
 ): JSX.Element {
-	const [{ as, class: classFromProps }, rest] = splitProps(props, [
-		"as",
-		"class",
-	]);
+	const rest = omit(props, "as", "class");
+	const Component = dynamic(() => defaultTo("ul", props.as) as ValidComponent);
 
-	const combinedClasses = cn(classFromProps, rest.className);
-	const variant = combinedClasses?.includes("contains-task-list")
-		? "tasks"
-		: as === "ol"
-			? "ordered"
-			: "default";
+	const variant = createMemo(() => {
+		const combinedClasses = cn(props.class);
+		return combinedClasses?.includes("contains-task-list")
+			? "tasks"
+			: props.as === "ol"
+				? "ordered"
+				: "default";
+	});
 
 	return (
-		<Dynamic
-			component={defaultTo("ul", as)}
-			class={cn(listStyles({ variant }), classFromProps)}
+		<Component
+			class={cn(listStyles({ variant: variant() }), props.class)}
 			{...rest}
 		>
 			{props.children}
-		</Dynamic>
+		</Component>
 	);
 }
 
@@ -66,14 +65,11 @@ export interface ListItemProps
 		ListItemBaseProps {}
 
 export function ListItem(props: Readonly<ListProps>): JSX.Element {
-	const [{ as, class: className }, rest] = splitProps(props, ["as", "class"]);
+	const rest = omit(props, "as", "class");
+	const Component = dynamic(() => defaultTo("li", props.as) as ValidComponent);
 	return (
-		<Dynamic
-			component={defaultTo("li", as)}
-			class={cn(listItemStyles(), className, "list")}
-			{...rest}
-		>
+		<Component class={cn(listItemStyles(), props.class, "list")} {...rest}>
 			{props.children}
-		</Dynamic>
+		</Component>
 	);
 }

@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 export type RelevantTags = Exclude<
 	keyof JSX.IntrinsicElements,
@@ -25,6 +25,8 @@ export type RelevantTags = Exclude<
 export interface PolymorphicComponent<T> extends JSX.HTMLAttributes<T> {
 	as?: RelevantTags;
 }
+
+export type Theme = "light" | "dark" | "system";
 
 export type Post = {
 	title: string;

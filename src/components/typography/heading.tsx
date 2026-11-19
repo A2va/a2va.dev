@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, Show, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
+import { Show, omit } from "solid-js";
+import { type JSX, type ValidComponent, dynamic } from "@solidjs/web";
 
 import { Anchor } from "~/components/anchor";
 import { cn, defaultTo } from "~/utils";
@@ -52,36 +52,41 @@ const HEADING_SIZE_TAG: Record<
 };
 
 export function Heading(props: Readonly<HeadingProps>): JSX.Element {
-	const [{ variant, size, as, class: className, hideAnchor }, rest] =
-		splitProps(props, ["size", "variant", "as", "class", "hideAnchor"]);
+	const rest = omit(props, "size", "variant", "as", "class", "hideAnchor");
 
-	const styles = headingStyles({ variant, size });
+	const Component = dynamic(
+		() =>
+			(props.as ??
+				HEADING_SIZE_TAG[
+					defaultTo("md", props.size) as NonNullable<HeadingBaseProps["size"]>
+				]) as ValidComponent,
+	);
+	const styles = () =>
+		headingStyles({ variant: props.variant, size: props.size });
 	const heading = (
-		<Dynamic
-			// @ts-ignore
-			component={as ?? HEADING_SIZE_TAG[defaultTo("md", size)]}
+		<Component
 			class={cn(
-				styles,
+				styles(),
 				{
 					inline: props.id,
 				},
-				className,
+				props.class,
 			)}
 			{...rest}
 		>
 			{props.children}
-		</Dynamic>
+		</Component>
 	);
 
 	return (
-		<Show when={props.id && !hideAnchor} fallback={heading}>
-			<div class={className}>
+		<Show when={props.id && !props.hideAnchor} fallback={heading}>
+			<div class={props.class}>
 				{heading}
 				<Anchor
 					href={`#${props.id}`}
 					rel="bookmark"
 					aria-label={"Permalink to this heading"}
-					class={cn(styles, "ml-[0.5ch] inline text-text-secondary")}
+					class={cn(styles(), "ml-[0.5ch] inline text-text-secondary")}
 					variant={"distinguished"}
 				>
 					<Typography.Text variant={"subdued"}>#</Typography.Text>

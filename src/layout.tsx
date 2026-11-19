@@ -1,6 +1,5 @@
 import { useLocation } from "@solidjs/router";
-import { createSignal, onCleanup, onMount } from "solid-js";
-import { isServer } from "solid-js/web";
+import { createSignal, onSettled } from "solid-js";
 
 import { Anchor } from "~/components/anchor";
 import { ColorModeSwitcher } from "~/components/theme";
@@ -23,7 +22,7 @@ function NavLink(props: NavLinkProps) {
 				href={props.href}
 				variant="subtle"
 				interactive={location.pathname !== props.href}
-				aria-current="page"
+				aria-current={location.pathname === props.href ? "page" : undefined}
 			>
 				{props.label}
 			</Anchor>
@@ -38,21 +37,22 @@ function BackToTopButton() {
 	const radius = 18;
 	const circumference = 2 * Math.PI * radius;
 
-	if (!isServer) {
-		const handleScroll = () => {
-			// Show button after scrolling down 400px
-			setShowButton(window.scrollY > 400);
+	const handleScroll = () => {
+		// Show button after scrolling down 400px
+		setShowButton(window.scrollY > 400);
 
-			// Calculate scroll progress
-			const { scrollTop, scrollHeight, clientHeight } =
-				document.documentElement;
-			const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
-			setScrollProgress(Math.min(scrollPercent, 100));
-		};
+		// Calculate scroll progress
+		const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+		const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+		setScrollProgress(Math.min(scrollPercent, 100));
+	};
 
-		onMount(() => window.addEventListener("scroll", handleScroll));
-		onCleanup(() => window.removeEventListener("scroll", handleScroll));
-	}
+	onSettled(() => {
+		handleScroll();
+		window.addEventListener("scroll", handleScroll);
+
+		return () => window.removeEventListener("scroll", handleScroll);
+	});
 
 	const scrollToTop = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });

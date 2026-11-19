@@ -17,7 +17,7 @@ function isExternalLink(href: string): boolean {
 
 export const MdxComponents = {
 	a: (props: Readonly<AnchorProps>) => (
-		<Anchor external={isExternalLink(props.href)} {...props} />
+		<Anchor external={isExternalLink(props.href ?? "")} {...props} />
 	),
 	h1: (props: Readonly<HeadingProps>) => (
 		<Typography.Heading size={"xxl"} class="mb-6 mt-0" {...props} />

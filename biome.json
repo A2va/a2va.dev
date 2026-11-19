@@ -18,5 +18,8 @@
 			"trailingCommas": "all",
 			"jsxQuoteStyle": "double"
 		}
+	},
+	"files": {
+		"ignore": ["file-routes.d.ts"]
 	}
 }

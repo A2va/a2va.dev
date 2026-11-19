@@ -1,5 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
+import { omit } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 import { cn } from "~/utils/cn";
 
@@ -13,18 +14,15 @@ export interface TableProps
 }
 
 export function Table(props: Readonly<TableProps>): JSX.Element {
-	const [{ class: className, containerClass }, rest] = splitProps(props, [
-		"class",
-		"containerClass",
-	]);
+	const rest = omit(props, "class", "containerClass");
 	return (
 		<div
 			class={cn(
 				"overflow-x-auto rounded-xl border border-solid border-warm-7 bg-warm-1",
-				containerClass,
+				props.containerClass,
 			)}
 		>
-			<table class={cn(tableStyles(), className)} {...rest} />
+			<table class={cn(tableStyles(), props.class)} {...rest} />
 		</div>
 	);
 }

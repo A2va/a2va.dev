@@ -1,5 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
+import { omit } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 import { cn } from "~/utils/cn";
 
@@ -22,10 +23,10 @@ interface DividerProps
 		DividerBaseProps {}
 
 export function Divider(props: Readonly<DividerProps>): JSX.Element {
-	const [{ size }, rest] = splitProps(props, ["size"]);
+	const rest = omit(props, "size");
 	return (
 		// biome-ignore lint/correctness/noVoidElementsWithChildren: <explanation>
-		<hr class={cn(dividerStyles({ size }))} {...rest}>
+		<hr class={cn(dividerStyles({ size: props.size }))} {...rest}>
 			{props.children}
 		</hr>
 	);

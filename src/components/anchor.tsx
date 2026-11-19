@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
+import { omit } from "solid-js";
+import { type JSX, type ValidComponent, dynamic } from "@solidjs/web";
 
 import { cn, defaultTo } from "~/utils";
 import type { PolymorphicComponent } from "~/utils/types";
@@ -40,31 +40,32 @@ export interface AnchorProps
 	interactive?: boolean;
 }
 export function Anchor(props: Readonly<AnchorProps>): JSX.Element {
-	const [
-		{ variant, as, class: className, external, noStyle, interactive },
-		rest,
-	] = splitProps(props, [
+	const rest = omit(
+		props,
 		"variant",
 		"as",
 		"class",
 		"external",
 		"noStyle",
 		"interactive",
-	]);
+	);
+	const Component = dynamic(() => defaultTo("a", props.as) as ValidComponent);
 	return (
-		<Dynamic
-			component={defaultTo("a", as)}
+		<Component
 			class={cn(
-				noStyle
+				props.noStyle
 					? null
-					: anchorStyles({ variant, interactive: interactive ?? true }),
-				className,
+					: anchorStyles({
+							variant: props.variant,
+							interactive: props.interactive ?? true,
+						}),
+				props.class,
 			)}
-			target={external ? "_blank" : "_self"}
-			rel={external ? "noopener noreferrer" : ""}
+			target={props.external ? "_blank" : undefined}
+			rel={props.external ? "noopener noreferrer" : undefined}
 			{...rest}
 		>
 			{props.children}
-		</Dynamic>
+		</Component>
 	);
 }

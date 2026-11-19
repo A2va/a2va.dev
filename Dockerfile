@@ -1,6 +1,6 @@
 # use the official Bun image
 # see all versions at https://hub.docker.com/r/oven/bun/tags
-FROM oven/bun:1 as base
+FROM oven/bun:1 AS base
 WORKDIR /usr/src/app
 
 # install dependencies into temp directory
@@ -21,22 +21,19 @@ FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
-# [optional] tests & build
+# [optional] build
+# Docker builds the Node target, so the Cloudflare Vite plugin stays off.
 ENV NODE_ENV=production
-ENV SERVER_PRESET=bun
-RUN bun test
+ENV SERVER_PRESET=node
 RUN bun run build
 
-# copy production dependencies and source code into final image
+# copy production dependencies and build output into final image
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/bun.lock .
+COPY --from=prerelease /usr/src/app/dist dist
 COPY --from=prerelease /usr/src/app/package.json .
-COPY --from=prerelease /usr/src/app/.vinxi .vinxi
-COPY --from=prerelease /usr/src/app/.output .output
 
 # run the app
 USER bun
 EXPOSE 3000/tcp
-# Make sure that it is running using bun node api with the bun flag
-ENTRYPOINT [ "bun", "run", "--bun", "start" ]
+ENTRYPOINT ["bun", "dist/server/node.js"]

@@ -2,7 +2,7 @@
 // https://github.com/andi23rosca/andi.dev/blob/main/src/components/Tree.tsx
 
 import { For, Show } from "solid-js";
-import type { JSX } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 type Node = { l: string; c: TreeNode[] };
 type TreeNode = string | Node;

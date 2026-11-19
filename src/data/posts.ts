@@ -1,7 +1,7 @@
 import type { Post } from "~/utils/types";
 import Posts from "./posts.json";
 
-export const posts: Post[] = Posts.map((p: Post) => ({
+export const posts: Post[] = (Posts as unknown as Post[]).map((p) => ({
 	...p,
 	date: new Date(p.date),
 }));

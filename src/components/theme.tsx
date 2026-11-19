@@ -1,9 +1,9 @@
-import { type JSX, createSignal, onMount } from "solid-js";
+import { createSignal, onSettled } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 import { IconButton } from "~/components/button";
 import { Moon, Sun, SunMoon } from "~/components/icons";
-
-type Theme = "light" | "dark" | "system";
+import type { Theme } from "~/utils/types";
 
 const DEFAULT_THEME: Theme = "system";
 
@@ -12,7 +12,7 @@ declare global {
 		theme?: {
 			initial: () => Theme;
 			current: () => Theme;
-			set: (theme: Theme) => Theme;
+			set: (theme: Theme) => void;
 		};
 	}
 }
@@ -22,10 +22,9 @@ export function ColorModeSwitcher(
 ): JSX.Element {
 	const [theme, setTheme] = createSignal<Theme>(DEFAULT_THEME);
 
-	onMount(() => {
-		const theme = (window.theme?.current() as Theme) || DEFAULT_THEME;
-		console.log("onMount", theme);
-		setTheme(theme);
+	onSettled(() => {
+		const currentTheme = (window.theme?.current() as Theme) || DEFAULT_THEME;
+		setTheme(currentTheme);
 	});
 
 	const onThemeToggle = () => {
@@ -59,7 +58,7 @@ export function ColorModeSwitcher(
 		<div class={props.class}>
 			<IconButton
 				id={props.id}
-				icon={icon}
+				icon={icon()}
 				title="Toggle theme"
 				aria-label={
 					theme() === "dark"
@@ -72,7 +71,7 @@ export function ColorModeSwitcher(
 				size={"md"}
 				variant={"tertiary"}
 				class="h-12 w-12 duration-200 ease-in-out"
-				onclick={onThemeToggle}
+				onClick={onThemeToggle}
 			/>
 		</div>
 	);

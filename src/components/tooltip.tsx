@@ -1,5 +1,8 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, Show, createSignal, splitProps } from "solid-js";
+import { createSignal, omit } from "solid-js";
+import type { JSX } from "@solidjs/web";
+
+import { cn } from "~/utils";
 
 // Updated tooltip styles with arrow variants
 const tooltipStyles = cva(
@@ -98,11 +101,7 @@ interface TooltipProps
 export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 	const [isVisible, setIsVisible] = createSignal(false);
 	const timeoutRef = { current: null as number | null };
-	const [{ position, size, content }, rest] = splitProps(props, [
-		"position",
-		"size",
-		"content",
-	]);
+	const rest = omit(props, "position", "size", "content");
 
 	const showTooltip = () => {
 		if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
@@ -111,7 +110,7 @@ export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 		// Dynamic timeout based on content length
 		const baseTime = 1500; // Minimum time in ms
 		const timePerChar = 50; // Extra time per character
-		const totalTime = baseTime + content.length * timePerChar;
+		const totalTime = baseTime + props.content.length * timePerChar;
 
 		timeoutRef.current = window.setTimeout(() => {
 			setIsVisible(false);
@@ -124,7 +123,6 @@ export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 	};
 
 	const toggleTooltip = () => {
-		console.log("pointer down");
 		if (isVisible()) {
 			hideTooltip();
 		} else {
@@ -142,14 +140,15 @@ export function Tooltip(props: Readonly<TooltipProps>): JSX.Element {
 		>
 			{props.children}
 			<div
-				class="text-center"
-				classList={{
-					[tooltipStyles({ position, size })]: true,
-					"opacity-0 scale-95 pointer-events-none": !isVisible(),
-					"opacity-100 scale-100 pointer-events-auto": isVisible(),
-				}}
+				class={cn(
+					"text-center",
+					tooltipStyles({ position: props.position, size: props.size }),
+					isVisible()
+						? "opacity-100 scale-100 pointer-events-auto"
+						: "opacity-0 scale-95 pointer-events-none",
+				)}
 			>
-				{content}
+				{props.content}
 			</div>
 		</div>
 	);

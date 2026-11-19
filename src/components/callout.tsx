@@ -1,5 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, splitProps } from "solid-js";
+import { Show, omit } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 const calloutStyles = cva(
 	[
@@ -70,17 +71,19 @@ interface CalloutProps
 }
 
 export function Callout(props: Readonly<CalloutProps>): JSX.Element {
-	const [{ variant, size, title, icon }, rest] = splitProps(props, [
-		"variant",
-		"size",
-		"title",
-		"icon",
-	]);
+	const rest = omit(props, "variant", "size", "title", "icon");
 
 	return (
-		<div class={calloutStyles({ variant, size })} {...rest}>
-			{icon && <span class="shrink-0 mt-0.5">{icon}</span>}
-			{title && <h4 class="font-semibold mb-1">{title}</h4>}
+		<div
+			class={calloutStyles({ variant: props.variant, size: props.size })}
+			{...rest}
+		>
+			<Show when={props.icon}>
+				<span class="shrink-0 mt-0.5">{props.icon}</span>
+			</Show>
+			<Show when={props.title}>
+				<h4 class="font-semibold mb-1">{props.title}</h4>
+			</Show>
 			<div>{props.children}</div>
 		</div>
 	);

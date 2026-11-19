@@ -1,5 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type JSX, Show, splitProps } from "solid-js";
+import { Show, omit } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 import { cn } from "~/utils";
 
@@ -81,14 +82,18 @@ interface ButtonProps
  * @see https://base.uber.com/6d2425e9f/p/756216-button/b/336373
  */
 export function Button(props: Readonly<ButtonProps>): JSX.Element {
-	const [{ variant, size, intent, class: className }, rest] = splitProps(
-		props,
-		["variant", "size", "class", "intent"],
-	);
+	const rest = omit(props, "variant", "size", "class", "intent");
 
 	return (
 		<button
-			class={cn(buttonStyles({ variant, size, intent }), className)}
+			class={cn(
+				buttonStyles({
+					variant: props.variant,
+					size: props.size,
+					intent: props.intent,
+				}),
+				props.class,
+			)}
 			{...rest}
 		>
 			<Show when={props.leadingIcon}>
@@ -122,21 +127,22 @@ interface IconButtonProps extends Omit<ButtonProps, "children"> {
 }
 
 export function IconButton(props: Readonly<IconButtonProps>): JSX.Element {
-	const [{ variant, size, intent, icon, class: className }, rest] = splitProps(
-		props,
-		["icon", "class", "variant", "size", "intent"],
-	);
+	const rest = omit(props, "icon", "class", "variant", "size", "intent");
 
 	return (
 		<button
 			class={cn(
-				buttonStyles({ variant, size, intent }),
-				iconButtonStyles({ size }),
-				className,
+				buttonStyles({
+					variant: props.variant,
+					size: props.size,
+					intent: props.intent,
+				}),
+				iconButtonStyles({ size: props.size }),
+				props.class,
 			)}
 			{...rest}
 		>
-			<IconContainer>{icon}</IconContainer>
+			<IconContainer>{props.icon}</IconContainer>
 		</button>
 	);
 }

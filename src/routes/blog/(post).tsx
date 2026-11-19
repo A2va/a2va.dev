@@ -1,89 +1,83 @@
-import {
-  type RouteSectionProps,
-  createAsync,
-  query,
-  redirect,
-  useLocation,
-} from "@solidjs/router";
-import { ErrorBoundary, Show } from "solid-js";
-// @ts-ignore
-import { MDXProvider } from "solid-mdx";
+import { query, useLocation } from "@solidjs/router";
+import { createMemo, Errored, Show } from "solid-js";
+import type { RouteSectionProps } from "@solidjs/router";
 
-import { Anchor, MdxComponents, Typography } from "~/components";
-import { Page } from "~/components/page";
+import { Page, Typography } from "~/components";
 import { postsMap } from "~/data/posts";
 
 import NotFound from "~/routes/[...404]";
 
 import { hyphenate } from "~/utils/hyphenate";
 
-const getPostMeta = query(async (slug: string) => {
-  "use server";
-  const post = postsMap.get(slug);
-  if (!post) {
-    // throw redirect("/404");
-    throw new Error("Post not found");
-  }
+type PostMeta = {
+	title: string;
+	description: string;
+	date: string;
+	slug: string;
+	author: string;
+	tags: string[];
+	image?: { src: string; alt: string };
+};
 
-  const isFuturePost = post.date > new Date();
-  const isUnpublished = post.unpublished;
+const getPostMeta = query(async (slug: string): Promise<PostMeta> => {
+	"use server";
+	const post = postsMap.get(slug);
+	if (!post) {
+		throw new Error("Post not found");
+	}
 
-  if ((isFuturePost || isUnpublished) && __APP_NODE_ENV === "production") {
-    // throw redirect("/404");
-    throw new Error("Post is not published");
-  }
+	const isFuturePost = post.date > new Date();
+	const isUnpublished = post.unpublished;
 
-  return post;
-}, "slug");
+	if ((isFuturePost || isUnpublished) && __APP_NODE_ENV === "production") {
+		throw new Error("Post is not published");
+	}
+
+	return { ...post, date: post.date.toISOString() };
+}, "post-meta");
 
 export default function BlogEntry(props: Readonly<RouteSectionProps>) {
-  const location = useLocation();
-  const articleId = () => {
-    const routeSegments = location.pathname.split("/");
-    return routeSegments[routeSegments.length - 1];
-  };
+	const location = useLocation();
+	const articleId = () => {
+		const routeSegments = location.pathname.split("/");
+		return routeSegments[routeSegments.length - 1];
+	};
 
-  const meta = createAsync(() => getPostMeta(articleId()), {
-    deferStream: true,
-  });
+	const meta = createMemo(() => getPostMeta(articleId()));
 
-  return (
-    <ErrorBoundary fallback={<NotFound />}>
-      <Show when={meta()} fallback={<div> Loading post...</div>}>
-        {(m) => (
-          <Page
-            title={m().title}
-            description={m().description}
-            image={m().image?.src}
-          >
-            <article>
-              <section class="mt-12 pb-12">
-                <Typography.Display id={hyphenate(m().title)}>
-                  {m().title}
-                </Typography.Display>
-                <Typography.Paragraph variant="subdued" size="lg" class="mt-10">
-                  {m().description}
-                </Typography.Paragraph>
-                <Typography.Paragraph variant="subdued" size="sm" class="mt-6">
-                  Published on{" "}
-                  <time dateTime={m().date.toISOString()}>
-                    {m().date.toLocaleDateString("en-GB", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </time>
-                </Typography.Paragraph>
-              </section>
-              <div class="prose prose-lg max-w-none">
-                <MDXProvider components={MdxComponents}>
-                  {props.children}
-                </MDXProvider>
-              </div>
-            </article>
-          </Page>
-        )}
-      </Show>
-    </ErrorBoundary>
-  );
+	return (
+		<Errored fallback={() => <NotFound />}>
+			<Show when={meta()} keyed>
+				{(post) => (
+					<Page
+						title={post.title}
+						description={post.description}
+						image={post.image?.src}
+					>
+						<article>
+							<section class="mt-12 pb-12">
+								<Typography.Display id={hyphenate(post.title)}>
+									{post.title}
+								</Typography.Display>
+								<Typography.Paragraph variant="subdued" size="lg" class="mt-10">
+									{post.description}
+								</Typography.Paragraph>
+								<Typography.Paragraph variant="subdued" size="sm" class="mt-6">
+									Published on{" "}
+									<time datetime={post.date}>
+										{new Date(post.date).toLocaleDateString("en-GB", {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										})}
+									</time>
+								</Typography.Paragraph>
+							</section>
+							<div class="prose prose-lg max-w-none">{props.children}</div>
+						</article>
+					</Page>
+				)}
+			</Show>
+		</Errored>
+	);
 }
