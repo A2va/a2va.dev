@@ -7,8 +7,7 @@
     "build:cloudflare": "bun install && SERVER_PRESET=cloudflare_pages vite build",
     "start": "node dist/server/node.js",
     "serve": "vite preview",
-    "format": "biome format --write .",
-    "preview:cloudflare": "wrangler pages dev dist"
+    "format": "biome format --write ."
   },
   "dependencies": {
     "@solidjs/meta": "^2.0.0",
@@ -28,6 +27,7 @@
     "@tailwindcss/vite": "^4.3.5",
     "@types/node": "^24.9.2",
     "filesystem-routing": "^0.5.0",
+    "miniflare": "^4",
     "nitro": "^3.0.261103-rc",
     "rehype-mdx-code-props": "^3.0.1",
     "rehype-slug": "^6.0.0",
@@ -37,8 +37,7 @@
     "to-vfile": "^8.0.0",
     "typescript": "^5.9.3",
     "vfile-matter": "^5.0.0",
-    "vite": "^8.3.8",
-    "wrangler": "^4.165.0"
+    "vite": "^8.3.8"
   },
   "engines": {
     "node": ">=22"
